@@ -6,14 +6,14 @@ const { blacklist } = require("../blacklist")
 require("dotenv").config()
 const userRoute=express.Router()
 
-userRoute.get("/",async(req,res)=>{
-    try {
-        const user=await UserModel.find()
-        res.status(200).json({msg:"here are the users",user})
-    } catch (error) {
-        res.status(400).json({msg:error.message})
-    }
-})
+// userRoute.get("/",async(req,res)=>{
+//     try {
+//         const user=await UserModel.find()
+//         res.status(200).json({msg:"here are the users",user})
+//     } catch (error) {
+//         res.status(400).json({msg:error.message})
+//     }
+// })
 userRoute.post("/register",async(req,res)=>{
     const {email,passward}=req.body
     try {
@@ -38,7 +38,6 @@ userRoute.post("/register",async(req,res)=>{
             else{
                 res.status(200).json({error:"password should contain 8 chars,at lease one uppercase,a special char,a number"})
             }
-            
         }  
     } catch (error) {
         res.status(400).json({msg:error.message,error:"catchblock"})
@@ -74,7 +73,7 @@ userRoute.post("/login",async(req,res)=>{
 userRoute.get("/logout",(req,res)=>{
     try {
         const token=req.headers.authorization?.split(" ")[1]
-        console.log(token)
+        //console.log(token)
         blacklist.push(token)
         res.status(200).json({msg:"Logout successfull!!"})
     } catch (error) {
@@ -92,7 +91,7 @@ const checkPass=(passward)=>{
     let flag1 = false;
     let flag2 = false;
     let flag3 = false;
-
+    
     for(let i=0; i<passward.length; i++){
         if(alpha.includes(passward[i])){
             flag1 = true
