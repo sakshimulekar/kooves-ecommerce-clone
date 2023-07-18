@@ -13,8 +13,14 @@ const auth=(req,res,next)=>{
             else{
                 const decoded=jwt.verify(token,process.env.secret_key)
                 console.log(decoded)
+                req.body.userId=decoded.userId;
+                req.body.username=decoded.username;
+                console.log(decoded.userId,decoded.username)
                 next()
             }
+        }
+        else{
+            res.status(200).json({msg:"please login!"})
         }
     } catch (error) {
         res.status(200).json({msg:error.message})
