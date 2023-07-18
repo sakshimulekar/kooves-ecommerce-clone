@@ -13,12 +13,12 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  useColorModeValue
+  useColorModeValue,Image
 } from '@chakra-ui/react';
 import { FaSearch, FaUser, FaStar, FaShoppingBag } from 'react-icons/fa';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import ThemeToggle from './themeToggle';
-
+import logo from "../Assest/kooves1_clone_Logo.png.png";
 const NavBar = () => {
   const bgColor = useColorModeValue('gray.200', 'gray.700');
   const textColor = useColorModeValue('black', 'white');
@@ -109,7 +109,9 @@ const NavBar = () => {
       </Stack>
 
       {/* Middle */}
-      <Box>Logo</Box>
+      <Box>
+        <Image src={logo} maxH="40px" h="full"/>
+      </Box>
 
       {/* Right side */}
       <Stack direction="row" spacing={4} align="center">

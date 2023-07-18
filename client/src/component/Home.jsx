@@ -1,10 +1,12 @@
 import React from 'react'
 import NavBar from './Navbar'
 
-import VideoChanger from './VideoCarosel'
+
 import SingleHomeCard from './SingleHomeCard'
 import { Button, Center, Heading } from '@chakra-ui/react'
 import Logos from './Logos'
+import ImageCarousel from './ImageCarousel'
+import Footer from './Footer'
 
 
 
@@ -14,8 +16,8 @@ const Home = () => {
     <div>
       <NavBar/>
       <div>
-        
-        <VideoChanger/>
+        {/* this imagecarsosel we use for single product page */}
+        <ImageCarousel/>
         <Heading>Shop Women's</Heading>
         <SingleHomeCard/>
         <Heading>Shop Men's</Heading>
@@ -24,7 +26,7 @@ const Home = () => {
         <SingleHomeCard/>
         <center><Button>View More</Button></center>
         <Logos/>
-        
+        <Footer/>
 
       </div>
     </div>
