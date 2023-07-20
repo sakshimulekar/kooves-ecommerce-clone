@@ -1,0 +1,22 @@
+export const homewomendata=[
+    {
+      image:"https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/10278877/2019/11/12/352e3703-d6de-43d5-804b-370082c81f6d1573553236671-Kook-N-Keech-Disney-Women-Pink-Daisy-Duck-Printed-Sweatshirt-1.jpg",
+      text:"tops",
+      link:"women/top"
+    },
+    {
+      image:"https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/15286934/2021/9/2/817dc96e-f893-47aa-824e-98d91f396f261630562359704EarringsURBANICWomenJacketsURBANICWomenCoatsURBANICWomenDres1.jpg",
+      text:"dresses",
+      link:"women/dresses"
+    },
+    {
+      image:"https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/12831554/2021/3/12/573f7013-7bb5-40c5-8b04-3ec22c5d811e1615530797360-GAP-Women-Pink-Solid-Round-Neck-T-shirt-9491615530795443-1.jpg",
+      text:"tshirt",
+      link:"women/tshirt"
+    },
+    {
+      image:"https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/13203912/2021/3/24/0f5fe5cb-696c-4cd5-a911-f1cec296f5e51616572811065-Lakme-Women-Foundation-and-Primer-4691616572807941-1.jpg",
+      text:"beautycare",
+      link:"women/beautycare"
+    }
+]

@@ -15,12 +15,13 @@ import {
   MenuItem,
   useColorModeValue,Image
 } from '@chakra-ui/react';
+import { Link,NavLink } from 'react-router-dom';
 import { FaSearch, FaUser, FaStar, FaShoppingBag } from 'react-icons/fa';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import ThemeToggle from './themeToggle';
-import logo from "../Assest/kooves1_clone_Logo.png.png";
+import ThemeToggle from '../themeToggle';
+import logo from "../../Assest/kooves1_clone_Logo.png.png";
 const NavBar = () => {
-  const bgColor = useColorModeValue('gray.200', 'gray.700');
+  const bgColor = useColorModeValue('white', 'gray.700');
   const textColor = useColorModeValue('black', 'white');
 
   return (
@@ -31,16 +32,22 @@ const NavBar = () => {
       padding="1rem"
       backgroundColor={bgColor}
       color={textColor}
+      boxShadow={"lg"}
+      
     >
       {/* Left side */}
       <Stack direction="row" spacing={4}>
         
         <Menu>
+          <NavLink >
           <MenuButton as={Box} cursor="pointer" _hover={{ textDecoration: 'none',color:'teal' }}>
             Men <ChevronDownIcon />
           </MenuButton>
+          </NavLink>
+          
           <MenuList>
-            <MenuItem>New In</MenuItem>
+            <NavLink><MenuItem textDecorationLine={"none"}>New in</MenuItem></NavLink>
+            
             <MenuItem>View All</MenuItem>
             <MenuItem>T-Shirts</MenuItem>
             <MenuItem>Jackets &amp; Coats</MenuItem>
