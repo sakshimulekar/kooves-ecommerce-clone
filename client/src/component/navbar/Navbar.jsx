@@ -39,7 +39,7 @@ const NavBar = () => {
       <Stack direction="row" spacing={4}>
         
         <Menu>
-          <NavLink >
+          <NavLink to={"/product"}>
           <MenuButton as={Box} cursor="pointer" _hover={{ textDecoration: 'none',color:'teal' }}>
             Men <ChevronDownIcon />
           </MenuButton>
