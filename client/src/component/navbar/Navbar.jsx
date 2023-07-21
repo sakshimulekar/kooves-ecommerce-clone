@@ -32,7 +32,12 @@ const NavBar = () => {
       padding="1rem"
       backgroundColor={bgColor}
       color={textColor}
-      boxShadow={"lg"}
+      boxShadow={'lg'}
+      position={'fixed'}
+      top={0}
+      left={0}
+      right={0}
+      zIndex={9999}
       
     >
       {/* Left side */}
@@ -47,16 +52,12 @@ const NavBar = () => {
           
           <MenuList>
             <NavLink><MenuItem textDecorationLine={"none"}>New in</MenuItem></NavLink>
-            
             <MenuItem>View All</MenuItem>
             <MenuItem>T-Shirts</MenuItem>
-            <MenuItem>Jackets &amp; Coats</MenuItem>
-            <MenuItem>Hoodies and Sweatshirts</MenuItem>
-            <MenuItem>Sweatpants</MenuItem>
+            <MenuItem>Traditional Wear</MenuItem>
+            <MenuItem>Formal Wear</MenuItem>
             <MenuItem>Shorts</MenuItem>
-            <MenuItem>Co-ord Sets</MenuItem>
-            <MenuItem>Gift Card</MenuItem>
-            <MenuItem>Create List</MenuItem>
+            <MenuItem>Footwear</MenuItem>
           </MenuList>
         </Menu>
 

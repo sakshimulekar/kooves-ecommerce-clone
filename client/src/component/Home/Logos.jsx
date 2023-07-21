@@ -17,7 +17,7 @@ let images = [koov, arkiv, kangol, keen, koovs, essential, conture, coma, brand,
 const Logos = () => {
   return (
     <div>
-      <Card>
+      <Card p={10}>
         <Flex wrap="wrap" justify="center" rowGap={20} columnGap={10}>
           {images?.map((e, index) => {
             return (
@@ -27,6 +27,7 @@ const Logos = () => {
                 maxW={{ base: '100%', sm: '200px' }}
                 src={e}
                 alt='Caffe Latte'
+                boxShadow={'2xl'}
               />
             );
           })}
