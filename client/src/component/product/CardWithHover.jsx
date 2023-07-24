@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Image, Heading, Text, Icon, Card,Tooltip,Grid } from '@chakra-ui/react';
 import { ViewIcon,StarIcon } from '@chakra-ui/icons';
 
-const ProductCard = ({ imageSrc, altImageSrc, title, brand, price,handleIconClick,handleSecClick}) => {
+const ProductCard = ({ images,color,title,price,brand,handleIconClick,handleSecClick}) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isIconHovered, setIsIconHovered] = useState(false);
 
@@ -18,9 +18,9 @@ const ProductCard = ({ imageSrc, altImageSrc, title, brand, price,handleIconClic
     // Add your logic for handling the icon click here
     console.log("click")
   };
-
+  
   return (
-    <Grid templateColumns='repeat(3,1fr)' gap={5}>
+
     <Card boxShadow={'md'} margin={'auto'}>
     <Box
       maxW="sm"
@@ -28,9 +28,10 @@ const ProductCard = ({ imageSrc, altImageSrc, title, brand, price,handleIconClic
       position="relative"
       onMouseEnter={handleCardMouseEnter}
       onMouseLeave={handleCardMouseLeave}
-    >
+    > 
+
       <Image 
-      src={isCardHovered? 'https://www.koovs.com/cdn/shop/files/Beige-02_979f47e0-524e-463d-bf19-da5b9ef8de27.jpg?v=1687933542&width=360' : 'https://www.koovs.com/cdn/shop/files/Red-05_0c144b3a-e7eb-4a7c-8938-3526145337f4.jpg?v=1687933542&width=360'}
+      src={isCardHovered?(images['image2']):(images['image1'])}
       alt={title}
       w={'100%'} />
       {isCardHovered && (
@@ -110,13 +111,13 @@ const ProductCard = ({ imageSrc, altImageSrc, title, brand, price,handleIconClic
 
     </Box>
     <Heading fontSize="20px" fontWeight="bold" mb="2">
-    Tshirt
+    {title}
     </Heading>
     <Text fontSize="16px" mb="2">
-      Puma
+    {brand}
     </Text>
   </Card>
-  </Grid>
+  
   );
 };
 
