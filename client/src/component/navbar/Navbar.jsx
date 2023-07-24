@@ -44,7 +44,7 @@ const NavBar = () => {
       <Stack direction="row" spacing={4}>
         
         <Menu>
-          <NavLink to={"/product"}>
+          <NavLink to={'/product'}>
           <MenuButton as={Box} cursor="pointer" _hover={{ textDecoration: 'none',color:'teal' }}>
             Men <ChevronDownIcon />
           </MenuButton>
@@ -62,9 +62,12 @@ const NavBar = () => {
         </Menu>
 
         <Menu>
-          <MenuButton as={Box} cursor="pointer" _hover={{ textDecoration: 'none',color:'teal' }}>
-            Women <ChevronDownIcon />
-          </MenuButton>
+          <NavLink to={'/product'}>
+            <MenuButton as={Box} cursor="pointer" _hover={{ textDecoration: 'none',color:'teal' }}>
+              Women <ChevronDownIcon />
+            </MenuButton>
+          </NavLink>
+          
           <MenuList>
             <MenuItem>New In</MenuItem>
             <MenuItem>View All</MenuItem>
@@ -117,9 +120,12 @@ const NavBar = () => {
       </Stack>
 
       {/* Middle */}
-      <Box>
-        <Image src={logo} maxH="40px" h="full"/>
-      </Box>
+      <NavLink to={'/'}>
+        <Box>
+          <Image src={logo} maxH="40px" h="full"/>
+        </Box>
+      </NavLink>
+      
 
       {/* Right side */}
       <Stack direction="row" spacing={4} align="center">

@@ -8,6 +8,8 @@ import Logos from './Logos'
 import ImageCarousel from './ImageCarousel'
 import Footer from '../Footer'
 import { homewomendata } from '../../utils/Homewomendata'
+import Products from '../../pages/Products'
+
 
 
 
@@ -20,11 +22,9 @@ const Home = () => {
         <Heading>Shop Women's</Heading>
         <SingleHomeCard data={homewomendata}/>
         <Heading>Shop Men's</Heading>
-        {/* <SingleHomeCard/>
-        <Center>Varsity Jackets</Center>
-        <SingleHomeCard/> */}
         <center><Button>View More</Button></center>
         <Logos/>
+        
         <Footer/>
 
       </div>
