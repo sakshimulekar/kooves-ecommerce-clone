@@ -84,7 +84,7 @@ const FilterSelect = () => {
         boxShadow: 'none',
         cursor: 'pointer', // Optionally set cursor to pointer to indicate it's clickable
     };
-    let ans=[category||size||brand||colour]
+    
     
   return (
     <>
@@ -98,13 +98,13 @@ const FilterSelect = () => {
         >
             <DrawerOverlay/>
             <DrawerContent>
-                <DrawerCloseButton/>
-                <DrawerHeader>
+                <DrawerCloseButton mt={20}/>
+                <DrawerHeader mt={20}>
                     Filters
                 </DrawerHeader>
 
                 <DrawerBody>
-                    <FormLabel>Brand</FormLabel>
+                    <FormLabel>Select Category</FormLabel>
                         <Box mb={'10'}>
                             <Box>
                                 <Checkbox onChange={handleCategory} value={'shoes'} defaultChecked={category.includes('shoes')}>
@@ -201,6 +201,17 @@ const FilterSelect = () => {
                             </Checkbox>
                         </Box>
                         
+                        <Box>
+                            <Checkbox onChange={handlesize} value={'XL'} defaultChecked={size.includes('XL')}>
+                                XL
+                            </Checkbox>
+                        </Box>
+
+                        <Box>
+                            <Checkbox onChange={handlesize} value={'XXL'} defaultChecked={size.includes('XXL')}>
+                                XXL
+                            </Checkbox>
+                        </Box>
                     </Box>
 
                     <Box mb={10}>
@@ -252,6 +263,16 @@ const FilterSelect = () => {
                         m={2}
                         />
                     </Tooltip>
+                    <Tooltip hasArrow label='white'>
+                    <IconButton
+                        isRound={true}
+                        bgColor='white' // Use a specific shade of gray (e.g., gray.50)
+                        fontSize='20px' 
+                        value={'white'}
+                        onClick={handlecolor} 
+                        m={2}
+                        />
+                    </Tooltip>
                     </Flex>
                     <Flex>
                     <Tooltip hasArrow label='red'>
@@ -294,23 +315,24 @@ const FilterSelect = () => {
                         m={2}
                         />
                     </Tooltip>
-                    <Tooltip hasArrow label='white'>
+                    <Tooltip hasArrow label='brown'>
                     <IconButton
                         isRound={true}
-                        bgColor='white' // Use a specific shade of gray (e.g., gray.50)
+                        bgColor='brown' // Use a specific shade of gray (e.g., gray.50)
                         fontSize='20px' 
-                        value={'white'}
+                        value={'brown'}
                         onClick={handlecolor} 
                         m={2}
                         />
                     </Tooltip>
+                    
                     </Flex>
                     </Box>
                 </DrawerBody>
             </DrawerContent>
         </Drawer>
        <SortSelect/>
-       <h1>{ans}</h1>
+       
       </Flex>
     </>
   )

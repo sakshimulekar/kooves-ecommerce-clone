@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Image, Heading, Text, Icon, Card,Tooltip,Grid } from '@chakra-ui/react';
+import { Box, Image, Heading, Text, Icon, Card,Tooltip,Grid,IconButton,Flex } from '@chakra-ui/react';
 import { ViewIcon,StarIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
 
-const ProductCard = ({ images,color,title,price,brand,handleIconClick,handleSecClick}) => {
+const ProductCard = ({images,color,title,price,brand,handleIconClick,handleSecClick}) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isIconHovered, setIsIconHovered] = useState(false);
-
+  const navigate = useNavigate()
   const handleCardMouseEnter = () => {
     setIsCardHovered(true);
   };
@@ -18,10 +19,14 @@ const ProductCard = ({ images,color,title,price,brand,handleIconClick,handleSecC
     // Add your logic for handling the icon click here
     console.log("click")
   };
-  
+  //console.log(title.length)
+  const handleSec=()=>{
+    console.log("E")
+    handleSecClick()
+  }
   return (
 
-    <Card boxShadow={'md'} margin={'auto'}>
+    <Card boxShadow={'md'} margin={'auto'} >
     <Box
       maxW="sm"
       overflow="hidden"
@@ -33,7 +38,8 @@ const ProductCard = ({ images,color,title,price,brand,handleIconClick,handleSecC
       <Image 
       src={isCardHovered?(images['image2']):(images['image1'])}
       alt={title}
-      w={'100%'} />
+      w={'100%'}
+      />
       {isCardHovered && (
         <Box
           fontSize="18px"
@@ -80,7 +86,7 @@ const ProductCard = ({ images,color,title,price,brand,handleIconClick,handleSecC
           transition="right 0.3s ease-in-out"
           transform="translateY(-50%)"
           cursor={'pointer'}
-          onClick={handleSecClick}
+          onClick={()=>handleSecClick()}
         >
           <Tooltip label='Add to wishlist' fontSize='sm' placement='left' m={2}>
           <Icon as={StarIcon} color={isIconHovered ? 'grey' : 'white'} />
@@ -104,18 +110,24 @@ const ProductCard = ({ images,color,title,price,brand,handleIconClick,handleSecC
           cursor={'pointer'}
           onClick={handleTextClick}
         >
-          <Tooltip label='Phone number' fontSize='md'>
+          <Tooltip label='view more' fontSize='md'>
             Select option
           </Tooltip>
         </Box>
 
     </Box>
-    <Heading fontSize="20px" fontWeight="bold" mb="2">
+    <Heading fontSize="20px" fontWeight="bold" m="3">
     {title}
     </Heading>
-    <Text fontSize="16px" mb="2">
-    {brand}
-    </Text>
+    <Flex fontSize="15px" m="2" justifyContent={'space-between'} alignItems={'center'}>
+    <Text>{brand}</Text>
+    <IconButton
+        isRound={true}
+        bgColor={color} // Use a specific shade of gray (e.g., gray.50)
+        width={10}
+        m={2}
+    />
+    </Flex>
   </Card>
   
   );

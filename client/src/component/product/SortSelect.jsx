@@ -12,16 +12,17 @@ const SortSelect = () => {
     };
   return (
     <div>
-      <Button style={buttonStyle} onClick={onOpen}>Feature {<ChevronDownIcon/>}</Button>
+      <Button style={buttonStyle} onClick={onOpen} >Feature {<ChevronDownIcon/>}</Button>
         <Drawer
+           
             isOpen={isOpen}
             onClose={onClose}
             placement='left'
         >
             <DrawerOverlay/>
-            <DrawerContent>
-                <DrawerCloseButton/>
-                <DrawerHeader>
+            <DrawerContent >
+                <DrawerCloseButton mt={20}/>
+                <DrawerHeader   mt={20}>
                     Feature
                 </DrawerHeader>
                 <DrawerBody>

@@ -5,6 +5,7 @@ import Products from '../pages/Products'
 
 import ProductPage from '../component/product/ProductPageCard'
 import ProductPageCard from '../component/product/ProductPageCard'
+import Wishlist from '../component/Wishlist/Wishlist'
 
 
 
@@ -15,6 +16,7 @@ const MainRoute = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/product' element={<Products/>}/>
+        <Route path='/wishlist' element={<Wishlist/>}/>
       </Routes>
     </>
   )
