@@ -6,17 +6,18 @@ const footwearSchema = new mongoose.Schema({
   title: String,
   price: Number,
   gender: String,
-  sizes: [String],
+  sizes: {type:String,enum:['S','M','L','XL','XXL' ]},
   description: String,
-  category: String,
-  brand: String,
-  color: String,
+  categories: {type:String,enum:["tshirt","short","kurta","shirt","shoes"]},
+  brand: {type:String,enum:["Roadster","HRX","Technosport","Huetrap","Dressberry","Puma","KALINI"]},
+  color: {type:String,enum:["white","black","red","pink","purple","grey","blue","green","yellow"]},
   discount: String,
   off_price: Number,
   images: {
     image1: String,
     image2: String,
-    image3: String
+    image3: String,
+    image4:String
   },
   rating: Number,
   count: Number

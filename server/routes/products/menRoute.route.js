@@ -2,14 +2,6 @@ const express=require("express")
 const { FootwearModel } = require("../../models/productmodel.model")
 const menRoute=express.Router()
 
-// menRoute.get("/",async(req,res)=>{
-//     try {
-//         const men=await FootwearModel.find()
-//         res.status(200).json({msg:"men data",men})
-//     } catch (error) {
-//         res.status(200).json({msg:error.message})
-//     }
-// })
 
 menRoute.get("/",async(req,res)=>{
     try {
@@ -30,9 +22,11 @@ menRoute.get("/",async(req,res)=>{
         if(sizes){
             q.sizes=sizes
         }
+        console.log(q)
         const product=await FootwearModel.find(q)
         console.log(product.length)
         res.status(200).json({msg:"here are the product",product})
+        console.log(product)
     } catch (error) {
         res.status(400).json({msg:error})
     }
