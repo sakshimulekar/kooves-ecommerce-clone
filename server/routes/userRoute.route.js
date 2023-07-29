@@ -15,7 +15,7 @@ const userRoute=express.Router()
 //     }
 // })
 userRoute.post("/register",async(req,res)=>{
-    const {email,passward}=req.body
+    const {email,password}=req.body
     try {
         const match=await UserModel.findOne({email})
         console.log(match)
@@ -23,10 +23,10 @@ userRoute.post("/register",async(req,res)=>{
             res.status(200).json({msg:"registered already! Please Log-In",user})
         }
         else{
-            if(checkPass(passward)){
-                bcrypt.hash(passward,5,async(err,hash)=>{
+            if(checkPass(password)){
+                bcrypt.hash(password,5,async(err,hash)=>{
                     if(hash){
-                        const user=new UserModel({...req.body,passward:hash})
+                        const user=new UserModel({...req.body,password:hash})
                         await user.save()
                         res.status(200).json({msg:"registered successfully!",user})
                     }
@@ -45,26 +45,26 @@ userRoute.post("/register",async(req,res)=>{
 })
 
 userRoute.post("/login",async(req,res)=>{
-    const {email,passward}=req.body
+    const {email,password}=req.body
     try {
         const match=await UserModel.find({email})
-        console.log(match)
-        if(!match){
-            res.status(200).json({msg:"user not found, register first"})
-        }
+        //console.log(match,'51')
+        if(match){
+            bcrypt.compare(password,match[0].password,async(result,err)=>{
+                //console.log(password,match[0].password)
+                if(result){
+                    const token=jwt.sign({userId:match[0]._id},process.env.secret_key)
+                    //console.log(match._id,"60")
+                    res.status(200).json({msg:"Login successfull!",match,token})
+                }
+                else{
+                    res.status(200).json({msg:err.message})
+                }
+            })
+        } 
         else{
-            
-                bcrypt.compare(passward,match.passward,async(result,err)=>{
-                    if(result){
-                        const token=jwt.sign({userId:match._id,username:match.firstName},process.env.secret_key)
-                        res.status(200).json({msg:"Login successfull!",match,token})
-                    }
-                    else{
-                        res.status(200).json({msg:"wrong credential"})
-                    }
-                })
-            
-        }  
+            res.status(200).json({msg:'wrong credential'})
+        } 
     } catch (error) {
         res.status(400).json({msg:error.message,error:"catchblock"})
     }
@@ -81,8 +81,8 @@ userRoute.get("/logout",(req,res)=>{
     }
 })
 
-const checkPass=(passward)=>{
-    if(passward.length < 8){
+const checkPass=(password)=>{
+    if(password.length < 8){
         return false;
     }
     let alpha="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -92,14 +92,14 @@ const checkPass=(passward)=>{
     let flag2 = false;
     let flag3 = false;
     
-    for(let i=0; i<passward.length; i++){
-        if(alpha.includes(passward[i])){
+    for(let i=0; i<password.length; i++){
+        if(alpha.includes(password[i])){
             flag1 = true
         }
-        if(nums.includes(passward[i])){
+        if(nums.includes(password[i])){
             flag2 = true
         }
-        if(spec.includes(passward[i])){
+        if(spec.includes(password[i])){
             flag3 = true
         }
     }

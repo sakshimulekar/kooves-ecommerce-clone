@@ -1,21 +1,27 @@
 const { blacklist } = require("../blacklist")
-const jwt=require("jsonwebtoken")
+const jwt=require("jsonwebtoken");
+const { UserModel } = require("../models/userModel.model");
 require("dotenv").config();
-const auth=(req,res,next)=>{
+const auth=async(req,res,next)=>{
     try {
         const token=req.headers.authorization?.split(" ")[1]
         if(token){
             const isBlacklisted=blacklist.includes(token)
-            console.log(isBlacklisted)
+            //console.log(isBlacklisted)
             if(isBlacklisted){
                 res.status(200).json({msg:"token expired,please login"})
             }
             else{
                 const decoded=jwt.verify(token,process.env.secret_key)
-                console.log(decoded)
-                req.body.userId=decoded.userId;
-                req.body.username=decoded.username;
-                console.log(decoded.userId,decoded.username)
+                // console.log(decoded)
+                console.log(decoded.userId,'middleware 17')
+                const user=await UserModel.findById(decoded.userId)
+                console.log(user,'middleware 19')
+                if(!user){
+                    res.status(200).json({msg:"unauthorized"})
+                }
+                req.user=user
+                console.log(req.user)
                 next()
             }
         }
