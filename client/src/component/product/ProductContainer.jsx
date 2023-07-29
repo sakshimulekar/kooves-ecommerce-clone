@@ -7,9 +7,12 @@ import {useDispatch, useSelector} from "react-redux"
 import { menProducts } from '../../redux/productReducer/action';
 import { Grid } from '@chakra-ui/react';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import { wishListAction } from '../../redux/WishlistReducer/action';
 
 const ProductContainer = () => {
   const product=useSelector(store=>store.productReducer.products)
+  const wishlist=useSelector(store=>store.wishlistReducer.wishlist)
+  console.log(wishlist)
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const dispatch=useDispatch()
@@ -37,13 +40,16 @@ const ProductContainer = () => {
   const handleIcon=(id)=>{
     console.log(id)
   }
-  const handleClick=(id)=>{
-    console.log(id)
+  const handleClick=(obj)=>{
+    console.log(obj)
+    dispatch(wishListAction(obj))
+
   }
   //console.log(obj)
   useEffect(()=>{
     dispatch(menProducts(obj))
     console.log(product)
+    console.log(wishlist)
   },[location.search])
   return (
     <div>
@@ -54,7 +60,7 @@ const ProductContainer = () => {
           <ProductCard 
           handleIcon={() => handleIcon(e._id)}
           handleIconClick={() => toggleModal(e)} // Pass the selected product to the toggleModal function
-          handleSecClick={()=>handleClick(e._id)} // I noticed you are not using this prop in the ProductCard component, consider removing it if not needed.
+          handleSecClick={()=>handleClick(e)} // I noticed you are not using this prop in the ProductCard component, consider removing it if not needed.
           {...e}
           key={e._id}
           />

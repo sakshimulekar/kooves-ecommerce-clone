@@ -20,10 +20,7 @@ const ProductCard = ({images,color,title,price,brand,handleIconClick,handleSecCl
     console.log("click")
   };
   //console.log(title.length)
-  const handleSec=()=>{
-    console.log("E")
-    handleSecClick()
-  }
+  
   return (
 
     <Card boxShadow={'md'} margin={'auto'} >
