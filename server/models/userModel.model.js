@@ -1,6 +1,12 @@
 const mongoose=require("mongoose")
 const {FootwearModel}=require('../models/productmodel.model')
 
+const cartItemSchema = new mongoose.Schema({
+    product: { type: mongoose.Schema.Types.ObjectId, ref:FootwearModel},
+    quantity: { type: Number, default: 1 },
+});
+  
+
 const userSchema=mongoose.Schema({
     firstName:{type:String},
     lastName:{type:String},
@@ -8,6 +14,7 @@ const userSchema=mongoose.Schema({
     password:{type:String},
     picture:{type:String},
     wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref:FootwearModel }],
+    cart: [cartItemSchema],
 },{
     versionKey:false
 })

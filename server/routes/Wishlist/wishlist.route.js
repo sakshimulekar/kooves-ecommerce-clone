@@ -1,5 +1,5 @@
 const express=require('express')
-const { MenwishlistModel } = require('../../models/WishListmodel.model')
+//const { MenwishlistModel } = require('../../models/WishListmodel.model')
 const { UserModel } = require('../../models/userModel.model')
 const { auth } = require('../../middleware/auth.middleware')
 
