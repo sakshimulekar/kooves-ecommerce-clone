@@ -20,6 +20,7 @@
     "nodemon": "^3.0.1",
     "passport": "^0.6.0",
     "passport-google-oauth2": "^0.2.0",
+    "stripe": "^12.16.0",
     "uuid": "^9.0.0"
   }
 }

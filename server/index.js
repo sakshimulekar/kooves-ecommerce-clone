@@ -8,6 +8,7 @@ const { kidsRoute } = require("./routes/products/kidsRoute.route")
 const { wishlistRoute } = require("./routes/Wishlist/wishlist.route")
 const {passport}=require("./routes/google_auth")
 const { cartRoute } = require("./routes/cartRoute.route")
+const { stripeRoute } = require("./routes/stripe.route")
 
 const app=express()
 require("dotenv").config()
@@ -45,6 +46,8 @@ app.use("/women",womenRoute)
 app.use("/kids",kidsRoute)
 app.use("/wishlist",wishlistRoute)
 app.use("/cart",cartRoute)
+app.use("/checkout",stripeRoute)
+
 app.listen(process.env.port,async()=>{
     try {
         await connection
