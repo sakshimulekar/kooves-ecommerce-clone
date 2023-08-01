@@ -9,19 +9,20 @@ const { wishlistRoute } = require("./routes/Wishlist/wishlist.route")
 const {passport}=require("./routes/google_auth")
 const { cartRoute } = require("./routes/cartRoute.route")
 const { stripeRoute } = require("./routes/stripe.route")
+const jwt=require("jsonwebtoken")
 
 const app=express()
 require("dotenv").config()
 
 app.use(express.json())
 app.use(cors())
-app.get("/",(req,res)=>{
-    try {
-        res.status(200).json({msg:"this the home page"})
-    } catch (error) {
-        res.status(400).json({msg:error.message})
-    }
-})
+// app.get("/",(req,res)=>{
+//     try {
+//         res.status(200).json({msg:"this the home page"})
+//     } catch (error) {
+//         res.status(400).json({msg:error.message})
+//     }
+// })
 
 
 app.get(
@@ -35,8 +36,31 @@ app.get(
         failureRedirect: "/login",
         session: false,
     }),
-    function (req, res) {
-    res.redirect('http://localhost:3000');    
+     (req, res)=> {
+        // const user=req.user
+        // const token=jwt.sign(user,process.env.secret_key)
+        //res.status(200).json({msg:token,e:'token'})
+        const user = req.user;
+console.log(user,'44')
+    // Create a JWT token with the user data and your secret key
+    const token = jwt.sign({user:user}, process.env.secret_key);
+
+    // Append the token as a query parameter in the redirect URL
+    
+        // res.json({
+        //     success: true,
+        //     message: 'Login successful!',
+        //     user: {
+        //       id: req.user.id,
+        //       email: req.user.email,
+        //       firstName: req.user.firstName,
+        //       lastName: req.user.lastName,
+        //       picture: req.user.picture,
+        //     },
+        //   });
+        const redirectUrl = `http://localhost:3000/success?token=${token}&id=${user.id}&email=${user.email}&firstName=${user.firstName}&lastName=${user.lastName}&picture=${user.picture}`;
+        //const redirectUrl = `http://localhost:3000/success?token=${token}`;
+        res.redirect(redirectUrl);    
 }
 );
 

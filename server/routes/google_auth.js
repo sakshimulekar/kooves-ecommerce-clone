@@ -25,7 +25,7 @@ passport.use(new GoogleStrategy({
         picture
     })
     await user.save()
-    return done(null,"user")
+    return done(null,user)
   }
 ));
 module.exports={
