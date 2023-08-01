@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_REQ, LOGIN_SUCCESS, SIGN_SUCCESS } from "./actiontype"
+import { GOOGLE_LOGIN_SUCCESS, LOGIN_FAIL, LOGIN_REQ, LOGIN_SUCCESS, SIGN_SUCCESS, STORE_TOKEN } from "./actiontype"
 import axios from "axios";
 
 export const signup=(obj)=>(dispatch)=>{
@@ -24,4 +24,22 @@ export const login=(obj)=>(dispatch)=>{
         dispatch({type:LOGIN_FAIL})
     })
 }
+
+export const googlelogin = () => (dispatch) => {
+    window.open('http://localhost:8000/auth/google', '_self');
+   
+  };
+  
+  export const googleLoginSuccess = (userData, token) =>(dispatch)=> {
+    console.log(userData)
+    return dispatch({
+      type: GOOGLE_LOGIN_SUCCESS,
+      payload: {
+        userData,
+        token,
+      },
+    });
+  };
+
+
 

@@ -12,6 +12,9 @@ const ModalComponent = ({ closeModal, product }) => {
   let a = Object.values(ans)
   //console.log(a)
   console.log(product)
+  const handleCart=(id)=>{
+    console.log(id)
+  }
   return (
     <Modal isOpen={true} onClose={closeModal} size={'5xl'} isCentered='true' >
       <ModalOverlay />
@@ -49,7 +52,7 @@ const ModalComponent = ({ closeModal, product }) => {
                 <Box m={5}>
                   <RatingStars rating={product.rating} />
                 </Box>  
-                <Button m={5}>Add to Cart</Button>
+                <Button m={5} onClick={()=>handleCart(product._id)}>Add to Cart</Button>
               </Box>
             </Flex>
             {/* Add other product details here */}

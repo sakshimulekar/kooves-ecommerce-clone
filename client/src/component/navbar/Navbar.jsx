@@ -147,12 +147,14 @@ const NavBar = () => {
           variant="ghost"
           colorScheme="gray"
         />
+        <Link to={'/cart'}>
         <IconButton
           aria-label="Cart"
           icon={<FaShoppingBag />}
           variant="ghost"
           colorScheme="gray"
         />
+        </Link>
         <ThemeToggle/>
       </Stack>
     </Flex>

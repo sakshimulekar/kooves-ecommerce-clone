@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Input, Stack, Heading, useToast } from '@chakra-ui/react';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../redux/authReducer/action';
+import { googlelogin, login } from '../redux/authReducer/action';
 
 const obj = {
   email: "",
@@ -11,7 +11,8 @@ const obj = {
 
 const Login = () => {
   const [state, setState] = useState(obj);
-  const isAuth = useSelector((store) => store.authReducer.token);
+  const isAuth = useSelector((store) => store.authReducer.isAuth);
+  console.log(isAuth)
   const toast = useToast({
     position:"top"
   });
@@ -55,12 +56,11 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    // Handle Google login logic here
-    window.location.href='http://localhost:8000/auth/google'
+    dispatch(googlelogin())
   };
 
   return (
-    <Stack spacing={4} maxW="md" m="auto" p={4}>
+    <Stack spacing={4} maxW="md" m="auto" p={4} mt={100}>
       <Heading>Log In</Heading>
       <Input type="email" placeholder="Email" name="email" value={state.email} onChange={handleClick} />
       <Input type="password" placeholder="Password" name="password" value={state.password} onChange={handleClick} />
