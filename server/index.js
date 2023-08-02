@@ -30,37 +30,16 @@ app.get(
     passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-app.get(
-    "/auth/google/callback",
+app.get("/auth/google/callback",
     passport.authenticate("google", {
         failureRedirect: "/login",
         session: false,
-    }),
-     (req, res)=> {
-        // const user=req.user
-        // const token=jwt.sign(user,process.env.secret_key)
-        //res.status(200).json({msg:token,e:'token'})
-        const user = req.user;
-console.log(user,'44')
+    }),(req, res)=> {
+    const user = req.user;
     // Create a JWT token with the user data and your secret key
     const token = jwt.sign({user:user}, process.env.secret_key);
-
-    // Append the token as a query parameter in the redirect URL
-    
-        // res.json({
-        //     success: true,
-        //     message: 'Login successful!',
-        //     user: {
-        //       id: req.user.id,
-        //       email: req.user.email,
-        //       firstName: req.user.firstName,
-        //       lastName: req.user.lastName,
-        //       picture: req.user.picture,
-        //     },
-        //   });
-        const redirectUrl = `http://localhost:3000/success?token=${token}&id=${user.id}&email=${user.email}&firstName=${user.firstName}&lastName=${user.lastName}&picture=${user.picture}`;
-        //const redirectUrl = `http://localhost:3000/success?token=${token}`;
-        res.redirect(redirectUrl);    
+    const redirectUrl = `http://localhost:3000/success?token=${token}&id=${user.id}&email=${user.email}&firstName=${user.firstName}&lastName=${user.lastName}&picture=${user.picture}`;
+    res.redirect(redirectUrl);    
 }
 );
 
