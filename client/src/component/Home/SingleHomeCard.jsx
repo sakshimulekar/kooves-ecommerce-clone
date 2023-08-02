@@ -29,13 +29,12 @@ const SingleHomeCard = ({data}) => {
     // Replace '/another-page' with the actual path you want to redirect to
     navigation(link)
   };
-//console.log(data)
+  //console.log(data)
   return (
     <>
     <Flex columnGap={5}>
       {data?.map((e,i)=>{
         return (
-        
         <Card
         key={i}
         maxW="sm"

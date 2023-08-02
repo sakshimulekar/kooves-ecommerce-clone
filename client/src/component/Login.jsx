@@ -12,9 +12,11 @@ const obj = {
 const Login = () => {
   const [state, setState] = useState(obj);
   const isAuth = useSelector((store) => store.authReducer.isAuth);
+  
   console.log(isAuth)
   const toast = useToast({
-    position:"top"
+    position:"top",
+    
   });
   const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ const Login = () => {
         title: 'Login Successful',
         status: 'success',
         duration: 5000,
-        isClosable: true
+        isClosable: true,
       });
     } else {
       toast({

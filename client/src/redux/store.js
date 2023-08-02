@@ -8,7 +8,6 @@ const rootReducer=combineReducers({
     authReducer,
     productReducer,
     wishlistReducer
-
 })
 
 export const store=legacy_createStore(rootReducer,applyMiddleware(thunk))

@@ -15,11 +15,12 @@ export const reducer=(state=initial,{type,payload})=>{
         case SIGN_SUCCESS:
             return {...state,isLoad:false,isAuth:true}
         case LOGIN_SUCCESS:
+            console.log(payload)
             return {...state,isLoad:false,isAuth:true,token:payload}
         case LOGIN_FAIL:
             return {...state,isErr:true}
         case GOOGLE_LOGIN_SUCCESS:
-            console.log(payload)
+            console.log(payload,'22 reducer')
             return {
                   ...state,
                   user: payload.userData,

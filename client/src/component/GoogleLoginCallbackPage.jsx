@@ -8,10 +8,12 @@ const GoogleLoginCallbackPage = () => {
     console.log(isAuth,'8')
   useEffect(() => {
     // Get the token from local storage
-    const token = localStorage.getItem('token');
-
+    const token = JSON.parse(localStorage.getItem('token'))
+    console.log(token,'12')
     // Assuming you have received the user data in the URL as well (modify the code accordingly)
     const searchParams = new URLSearchParams(window.location.search);
+    const tokenfromurl=searchParams.get('token')
+    console.log(tokenfromurl,'16')
     const userData = {
       id: searchParams.get('id'),
       email: searchParams.get('email'),
@@ -19,9 +21,9 @@ const GoogleLoginCallbackPage = () => {
       lastName: searchParams.get('lastName'),
       picture: searchParams.get('picture'),
     };
-
+    localStorage.setItem('token',JSON.stringify(tokenfromurl))
     // Dispatch the action to update the Redux state with user data and token
-    dispatch(googleLoginSuccess(userData, token));
+    dispatch(googleLoginSuccess(userData, tokenfromurl));
 
     // Redirect the user to the desired page after successful login
     // window.location.href = '/dashboard'; // Replace with the desired page

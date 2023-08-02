@@ -37,7 +37,7 @@ const NavBar = () => {
       top={0}
       left={0}
       right={0}
-      zIndex={9999}
+      zIndex={1}
       
     >
       {/* Left side */}

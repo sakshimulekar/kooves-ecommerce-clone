@@ -1,22 +1,16 @@
 import React from 'react'
-
-
-
 import SingleHomeCard from './SingleHomeCard'
-import { Button, Center, Heading } from '@chakra-ui/react'
+import { Box, Button, Center, Heading } from '@chakra-ui/react'
 import Logos from './Logos'
 import ImageCarousel from './ImageCarousel'
 import Footer from '../Footer'
 import { homewomendata } from '../../utils/Homewomendata'
 import Products from '../../pages/Products'
 
-
-
-
 const Home = () => {
   
   return (
-    <div>
+    <Box mt={20}>
         {/* this imagecarsosel we use for single product page */}
         <ImageCarousel/>
         <Heading>Shop Women's</Heading>
@@ -27,7 +21,7 @@ const Home = () => {
         
         <Footer/>
 
-      </div>
+      </Box>
   )
 }
 
