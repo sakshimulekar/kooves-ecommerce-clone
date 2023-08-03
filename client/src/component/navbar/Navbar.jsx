@@ -20,10 +20,17 @@ import { FaSearch, FaUser, FaStar, FaShoppingBag } from 'react-icons/fa';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import ThemeToggle from '../themeToggle';
 import logo from "../../Assest/kooves1_clone_Logo.png.png";
+import { useDispatch, useSelector } from 'react-redux';
 const NavBar = () => {
   const bgColor = useColorModeValue('white', 'gray.700');
   const textColor = useColorModeValue('black', 'white');
+  const dispatch=useDispatch()
 
+  const handleLogout = () => {
+    dispatch()
+    localStorage.clear();
+    window.location.href = '/login';
+  };
   return (
     <Flex
       as="nav"
@@ -156,6 +163,7 @@ const NavBar = () => {
         />
         </Link>
         <ThemeToggle/>
+        <button onClick={handleLogout}>Logout</button>
       </Stack>
     </Flex>
   );
