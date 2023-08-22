@@ -6,10 +6,12 @@ import FilterSelect from './FilterSelect';
 import {useDispatch, useSelector} from "react-redux"
 import { menProducts } from '../../redux/productReducer/action';
 import { Grid } from '@chakra-ui/react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { wishListAction } from '../../redux/WishlistReducer/action';
 
 const ProductContainer = () => {
+  const navigate = useNavigate()
+  const isAuth = useSelector(store=>store.authReducer.isAuth)
   const product=useSelector(store=>store.productReducer.products)
   const wishlist=useSelector(store=>store.wishlistReducer.wishlist)
   console.log(wishlist)
@@ -41,9 +43,13 @@ const ProductContainer = () => {
     console.log(id)
   }
   const handleClick=(obj)=>{
-    console.log(obj)
-    dispatch(wishListAction(obj))
-
+    console.log(obj,'add to wishlist 44')
+    if(isAuth){
+      dispatch(wishListAction(obj))
+    }
+    else{
+      navigate('/login')
+    }
   }
   //console.log(obj)
   useEffect(()=>{

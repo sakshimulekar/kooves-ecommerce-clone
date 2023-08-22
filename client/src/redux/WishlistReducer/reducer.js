@@ -1,4 +1,4 @@
-import { WISHLIST_FAIL, WISHLIST_REQ, WISHLIST_SUCCESS } from "./actiontype"
+import { WISHLIST_FAIL, WISHLIST_GET, WISHLIST_REQ, WISHLIST_SUCCESS } from "./actiontype"
 
 const initial={
     isLoad:false,
@@ -13,6 +13,8 @@ export const reducer=(state=initial,{type,payload})=>{
             return {...state,wishlist:[...state.wishlist,payload],isLoad:false}
         case WISHLIST_FAIL:
             return {...state,isErr:true}
+        case WISHLIST_GET:
+            return {...state,wishlist:[...state.wishlist,payload],isLoad:false}
         default :
         return state
     }

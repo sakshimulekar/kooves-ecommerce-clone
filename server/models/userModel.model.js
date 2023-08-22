@@ -13,6 +13,7 @@ const userSchema=mongoose.Schema({
     email:{type:String},
     password:{type:String},
     picture:{type:String},
+    userId:String,
     wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref:FootwearModel }],
     cart: [cartItemSchema],
 },{

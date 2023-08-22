@@ -11,7 +11,7 @@ passport.use(new GoogleStrategy({
     passReqToCallback   : true
   },
   async function(request, accessToken, refreshToken, profile, done) {
-    console.log(profile)
+    //console.log(profile)
    
     let email=profile._json.email
     let firstName=profile._json.given_name

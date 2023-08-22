@@ -22,7 +22,7 @@ import { ArrowForwardIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 const SingleHomeCard = ({data}) => {
   const navigation = useNavigate();
-  const bgColor = useColorModeValue('gray.200', 'gray.700');
+  const bgColor = useColorModeValue('gray.100', 'gray.700');
   const textColor = useColorModeValue('black', 'white');
 
   const handleRedirect = (link) => {
@@ -32,7 +32,7 @@ const SingleHomeCard = ({data}) => {
   //console.log(data)
   return (
     <>
-    <Flex columnGap={5} bgColor={'gold'}  p={10}>
+    <Flex columnGap={5} bgColor={'blue.900'}  p={10}>
       {data?.map((e,i)=>{
         return (
         <Card

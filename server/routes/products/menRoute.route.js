@@ -22,11 +22,11 @@ menRoute.get("/",async(req,res)=>{
         if(sizes){
             q.sizes=sizes
         }
-        console.log(q)
+        //console.log(q)
         const product=await FootwearModel.find(q)
-        console.log(product.length)
+        //console.log(product.length)
         res.status(200).json({msg:"here are the product",product})
-        console.log(product)
+        //console.log(product)
     } catch (error) {
         res.status(400).json({msg:error})
     }

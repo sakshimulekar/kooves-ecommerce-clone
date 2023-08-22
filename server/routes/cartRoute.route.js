@@ -5,29 +5,32 @@ const { UserModel } = require('../models/userModel.model');
 
 const cartRoute = express.Router()
 cartRoute.use(auth)
+
 cartRoute.post('/addToCart', async (req, res) => {
-  const productId = req.body._id;
+  const productId = req.body.id;
   const quantity = req.body.quantity;
   const userId = req.user._id;
-
+  console.log(productId,'productId',quantity,'quantity',userId,'userId')
   try {
     const user = await UserModel.findById(userId);
-
+    console.log(user,'15')
     // Check if the product with the given productId is already in the user's cart
     const existingCartItem = user.cart.find((item) => item.product && item.product.equals(productId));
-
+    
+    console.log(existingCartItem,"18")
     if (existingCartItem) {
       // If the product is already in the cart, update its quantity
-      existingCartItem.quantity += quantity;
+      existingCartItem.quantity = quantity;
+      return res.status(200).json({ message: 'Product already in cart', cart: existingCartItem });
     } else {
       // If the product is not in the cart, add it as a new item with the given quantity
       const newCartItem = { product: productId, quantity };
       user.cart.push(newCartItem);
+      await user.save();
+      return res.status(200).json({ message: 'Product added to cart successfully', cart: user.cart });
     }
 
-    await user.save();
-
-    return res.status(200).json({ message: 'Product added to cart successfully', cart: user.cart });
+    
   } catch (error) {
     console.error('Error adding product to cart:', error);
     return res.status(500).json({ error: 'Could not add product to cart' });

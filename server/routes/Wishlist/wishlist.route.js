@@ -8,8 +8,8 @@ const wishlistRoute=express.Router()
 wishlistRoute.get("/",auth, async(req,res)=>{
   const userId=req.user._id
     try {
-
         const card=await UserModel.findById(userId).populate('wishlist')
+        console.log(card)
         res.status(200).json({msg:'here is wishlist',product:card.wishlist})
     } catch (error) {
       console.error('Error fetching wishlist:', error);
@@ -20,21 +20,21 @@ wishlistRoute.get("/",auth, async(req,res)=>{
 
 wishlistRoute.post('/addtowishlist',auth,async(req,res)=>{
     const  productId  = req.body._id;
-    //console.log(productId,"wishlist route productid 17")
+    console.log(productId,"wishlist route productid 17")
     const userId = req.user._id; // Assuming you set the user object in the request during authentication middleware.
     console.log(userId,"wishlist route userId 19")
     try {
       const user = await UserModel.findById(userId);
-  
+      console.log(user,'28')
       if (user.wishlist.includes(productId)) {
-        return res.status(400).json({ error: 'Product is already in the wishlist' });
+        return res.status(200).json({msg:user, message: 'Product is already in the wishlist' });
       }
   
       // If the product is not a duplicate, add it to the user's wishlist
       user.wishlist.push(productId);
       await user.save();
-  
-      return res.status(200).json({ message: 'Product added to wishlist successfully' });
+      console.log(user,'check wishlist product 36')
+      return res.status(200).json({ message: 'Product added to wishlist successfully',msg:user });
     } 
   catch (error) {
     console.error('Error adding product to wishlist:', error);

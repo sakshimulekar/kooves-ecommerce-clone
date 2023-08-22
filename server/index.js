@@ -1,5 +1,6 @@
 const express=require("express")
 const cors=require("cors")
+const cookieParser = require('cookie-parser');
 const { userRoute } = require("./routes/userRoute.route")
 const { connection } = require("./db")
 const { menRoute } = require("./routes/products/menRoute.route")
@@ -16,6 +17,7 @@ require("dotenv").config()
 
 app.use(express.json())
 app.use(cors())
+app.use(cookieParser());
 // app.get("/",(req,res)=>{
 //     try {
 //         res.status(200).json({msg:"this the home page"})
@@ -33,12 +35,15 @@ app.get(
 app.get("/auth/google/callback",
     passport.authenticate("google", {
         failureRedirect: "/login",
+        redirectUrl:'http://localhost:3000',
         session: false,
     }),(req, res)=> {
     const user = req.user;
+    //const googleAccessToken = req.query.access_token;
+    console.log(user,"line : 39")
     // Create a JWT token with the user data and your secret key
     const token = jwt.sign({user:user}, process.env.secret_key);
-    const redirectUrl = `http://localhost:3000/success?token=${token}&id=${user.id}&email=${user.email}&firstName=${user.firstName}&lastName=${user.lastName}&picture=${user.picture}`;
+    const redirectUrl = `http://localhost:3000/success?token=${token}&firstName=${user.firstName}&picture=${user.picture}`;
     res.redirect(redirectUrl);    
 }
 );
@@ -59,6 +64,5 @@ app.listen(process.env.port,async()=>{
         console.log(error.message)
     }
 })
-
 
 

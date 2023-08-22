@@ -1,0 +1,5 @@
+export const  CART_REQ  = 'CART_REQ'
+export const  CART_GET  = 'CART_GET'
+export const  CART_ADD  = 'CART_ADD'
+export const  CART_DEL  = 'CART_DEL'
+export const  CART_EDIT  = 'CART_EDIT'

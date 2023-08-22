@@ -3,10 +3,12 @@ import { Box, Image, Heading, Text, Icon, Card,Tooltip,Grid,IconButton,Flex } fr
 import { ViewIcon,StarIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 
+import { IoHeartCircleSharp } from "react-icons/io5";
 const ProductCard = ({images,color,title,price,brand,handleIconClick,handleSecClick}) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isIconHovered, setIsIconHovered] = useState(false);
   const navigate = useNavigate()
+  
   const handleCardMouseEnter = () => {
     setIsCardHovered(true);
   };
@@ -86,7 +88,8 @@ const ProductCard = ({images,color,title,price,brand,handleIconClick,handleSecCl
           onClick={()=>handleSecClick()}
         >
           <Tooltip label='Add to wishlist' fontSize='sm' placement='left' m={2}>
-          <Icon as={StarIcon} color={isIconHovered ? 'grey' : 'white'} />
+            <Box  ml={2} mt={1} p={1}><IoHeartCircleSharp/></Box>
+          {/* <Icon as={StarIcon} color={isIconHovered ? 'grey' : 'white'} /> */}
           </Tooltip>
       
         </Box>

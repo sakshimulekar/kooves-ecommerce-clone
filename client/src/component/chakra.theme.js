@@ -14,13 +14,13 @@ const theme = extendTheme({
       // Define your light theme colors here
       // Example:
       bgColor:'white',
-      Color:'blackAlpha.900'
+      Color:'black'
     },
     dark: {
       // Define your dark theme colors here
       // Example:
-      bgColor:'blackAlpha.100',
-      text: 'white',
+      bgColor:'black',
+      Color: 'white',
     },
   },
 });

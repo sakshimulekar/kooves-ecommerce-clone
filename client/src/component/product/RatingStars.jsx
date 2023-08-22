@@ -44,7 +44,7 @@ const RatingStars = ({ rating }) => {
     const stars = [];
     for (let i = 0; i < count; i++) {
       stars.push(
-        <Icon key={i} as={StarIcon} color="yellow.400" boxSize={6} />
+        <Icon key={i} as={StarIcon} color="gold" boxSize={6} />
       );
     }
     return stars;
@@ -54,10 +54,10 @@ const RatingStars = ({ rating }) => {
     <Flex alignItems="center">
       {renderStars(fullStars)}
       {hasHalfStar && (
-        <Icon as={StarIcon} color="yellow.400" boxSize={6} viewBox="0 0 200 200" clipPath="url(#starClip)" />
+        <Icon as={StarIcon} color='yellow.200'  boxSize={6} viewBox="0 0 200 200" clipPath="url(#starClip)" />
       )}
       {Array.from({ length: 5 - fullStars - (hasHalfStar ? 1 : 0) }).map((_, index) => (
-        <Icon key={`empty-${index}`} as={StarIcon} color="gray.300" boxSize={6} />
+        <Icon key={`empty-${index}`} as={StarIcon} color='yellow.200'  boxSize={6} />
       ))}
     </Flex>
   );

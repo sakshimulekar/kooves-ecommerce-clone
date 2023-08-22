@@ -1,20 +1,47 @@
 // ModalComponent.js
-import React from 'react';
+import React, { useState } from 'react';
 import {Button,Grid,Badge, Box,Flex, Modal, ModalOverlay,Heading, ModalContent, ModalHeader, ModalCloseButton, ModalBody,Image,Text } from '@chakra-ui/react';
 import Caroselimage from './Caroselimage';
 import RatingStars from './RatingStars';
-
+import {useDispatch, useSelector} from 'react-redux'
+import { addCart } from '../../redux/CartReducer/action';
 // Inside the ModalComponent component
-
+import {useNavigate} from 'react-router-dom'
 const ModalComponent = ({ closeModal, product }) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isAuth = useSelector(store=>store.authReducer.isAuth)
+  const [count,setCount] = useState(1)
   // You can now use the 'product' prop to access the relevant product details
   let ans = product.images
+  console.log(ans)
   let a = Object.values(ans)
-  //console.log(a)
+  console.log(a)
+
   console.log(product)
+
   const handleCart=(id)=>{
+    const quantity = count
+    console.log(quantity)
     console.log(id)
+    const obj = {id,quantity}
+    console.log(obj)
+    if(isAuth){
+      dispatch(addCart(obj))
+    }
+    else{
+      navigate('/login')
+    }
+    
   }
+
+
+
+
+
+
+
+
   return (
     <Modal isOpen={true} onClose={closeModal} size={'5xl'} isCentered='true' >
       <ModalOverlay />
@@ -48,6 +75,11 @@ const ModalComponent = ({ closeModal, product }) => {
                 </Box>
                 <Box m={5}>
                   <Text fontSize={'xl'}>{product.description}</Text>
+                </Box>
+                <Box>
+                  <Button onClick={()=>setCount(count+1)} isDisabled={product.count?count === product.count:count===10}>+</Button>
+                  {count}
+                  <Button onClick={()=>setCount(count-1)} isDisabled={count === 1} >-</Button>
                 </Box>
                 <Box m={5}>
                   <RatingStars rating={product.rating} />

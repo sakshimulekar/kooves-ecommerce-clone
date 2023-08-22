@@ -19,7 +19,7 @@ const MainRoute = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<SignUp/>}/>
         <Route path='/product' element={<Products/>}/>
-        <Route path='/wishlist' element={<Wishlist/>}/>
+        <Route path='/wishlist' element={<PrivateRoute><Wishlist/></PrivateRoute>}/>
         <Route path='/success' element={<GoogleLoginCallbackPage/>}/>
         <Route path='/cart' element={<PrivateRoute>
           <Cart/>

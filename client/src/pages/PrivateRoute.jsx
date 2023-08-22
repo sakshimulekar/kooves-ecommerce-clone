@@ -1,18 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { login } from '../redux/authReducer/action';
+import { loginSuccessWithToken } from '../redux/authReducer/action';
 
 const PrivateRoute = ({ children }) => {
-  const authToken = localStorage.getItem('token');
-
-  const auth = useSelector((store) => store.authReducer.isAuth);
+  const dispatch = useDispatch()
+  // let Token = JSON.parse(localStorage.getItem('token')) 
+  //dispatch(loginSuccessWithToken(Token))
+  let auth = useSelector((store) => store.authReducer.isAuth);
   console.log(auth);
  // const navigate = useNavigate();
 
   return (
     <>
-    {auth || authToken?children:(<Navigate to={'/login'}/>)}
+    {auth?children:(<Navigate to={'/login'}/>)}
     </>
   )
 };

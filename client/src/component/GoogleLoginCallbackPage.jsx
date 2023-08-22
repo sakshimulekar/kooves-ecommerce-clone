@@ -15,13 +15,12 @@ const GoogleLoginCallbackPage = () => {
     const tokenfromurl=searchParams.get('token')
     console.log(tokenfromurl,'16')
     const userData = {
-      id: searchParams.get('id'),
-      email: searchParams.get('email'),
       firstName: searchParams.get('firstName'),
-      lastName: searchParams.get('lastName'),
       picture: searchParams.get('picture'),
     };
+    
     localStorage.setItem('token',JSON.stringify(tokenfromurl))
+    localStorage.setItem('user',JSON.stringify(userData))
     // Dispatch the action to update the Redux state with user data and token
     dispatch(googleLoginSuccess(userData, tokenfromurl));
 
@@ -29,11 +28,11 @@ const GoogleLoginCallbackPage = () => {
     // window.location.href = '/dashboard'; // Replace with the desired page
   }, [dispatch]);
 
-  // The 'isAuth' state will now reflect the token value from 'localStorage'
-  // It will be 'true' if the token exists in 'localStorage', otherwise 'false'
   console.log(isAuth);
 
   return <div>Logging in...</div>; // Or you can show a loading spinner
 };
 
 export default GoogleLoginCallbackPage;
+
+

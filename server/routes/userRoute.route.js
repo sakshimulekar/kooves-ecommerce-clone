@@ -47,17 +47,19 @@ userRoute.post("/register",async(req,res)=>{
 userRoute.post("/login",async(req,res)=>{
     const {email,password}=req.body
     try {
-        const match=await UserModel.find({email})
-        //console.log(match,'51')
+        const match=await UserModel.findOne({email})
+        console.log(match,'51')
         if(match){
-            bcrypt.compare(password,match[0].password,async(result,err)=>{
-                //console.log(password,match[0].password)
+            bcrypt.compare(password,match.password,async(result,err)=>{
+                console.log(match.password)
                 if(result){
-                    const token=jwt.sign({userId:match[0]._id},process.env.secret_key)
+                    const token=jwt.sign({userId:match._id},process.env.secret_key)
                     //console.log(match._id,"60")
+                    console.log(match)
                     res.status(200).json({msg:"Login successfull!",match,token})
                 }
                 else{
+                    console.log('error')
                     res.status(200).json({msg:err.message})
                 }
             })
@@ -73,7 +75,7 @@ userRoute.post("/login",async(req,res)=>{
 userRoute.get("/logout",(req,res)=>{
     try {
         const token=req.headers.authorization?.split(" ")[1]
-        //console.log(token)
+        console.log(token)
         blacklist.push(token)
         res.status(200).json({msg:"Logout successfull!!"})
     } catch (error) {
