@@ -42,27 +42,66 @@
 // }
 
 
+// const jwt = require('jsonwebtoken');
+// const { UserModel } = require('../models/userModel.model');
+// require('dotenv').config();
+
+// const auth = async (req, res, next) => {
+//   try {
+//     const token = req.headers.authorization?.split(' ')[1];
+//     console.log(token,"auth 52")
+//     if (token) {
+//       const decoded = jwt.verify(token, process.env.secret_key);
+//       console.log(decoded,"auth 55 decoded")
+//       const userId = decoded.userId;
+//       console.log(userId,"auth 55 userId")
+//       const user = await UserModel.findById(userId);
+      
+//       if (!user) {
+//         res.status(200).json({ msg: 'Unauthorized' });
+//       }
+
+//       req.user = user;
+//       next();
+//     } else {
+//       res.status(200).json({ msg: 'Please log in!' });
+//     }
+//   } catch (error) {
+//     res.status(200).json({ msg: error.message });
+//   }
+// };
+
+// module.exports = {
+//   auth
+// };
+
+//previous code from git :
 const jwt = require('jsonwebtoken');
 const { UserModel } = require('../models/userModel.model');
 require('dotenv').config();
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.headers.authorization?.split(" ")[1];
     console.log(token,"auth 52")
     if (token) {
       const decoded = jwt.verify(token, process.env.secret_key);
-      console.log(decoded,"auth 55 decoded")
-      const userId = decoded.userId;
-      console.log(userId,"auth 55 userId")
-      const user = await UserModel.findById(userId);
       
+      if(decoded){
+        console.log(decoded,"auth 91 decoded")
+        const userId = decoded.user._id;
+        console.log(userId,"auth 55 userId")
+      const user = await UserModel.findById(userId);
+      console.log(userId,"auth 95 user")
       if (!user) {
         res.status(200).json({ msg: 'Unauthorized' });
       }
 
       req.user = user;
       next();
+      }
+     
+      
     } else {
       res.status(200).json({ msg: 'Please log in!' });
     }

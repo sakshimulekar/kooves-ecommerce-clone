@@ -15,12 +15,12 @@ const userRoute=express.Router()
 //     }
 // })
 userRoute.post("/register",async(req,res)=>{
-    const {email,password}=req.body
+    const {email,password,firstName,lastName}=req.body
     try {
         const match=await UserModel.findOne({email})
         console.log(match)
         if(match){
-            res.status(200).json({msg:"registered already! Please Log-In",user})
+            return res.status(200).json({msg:"registered already! Please Log-In",user})
         }
         else{
             if(checkPass(password)){
@@ -28,56 +28,56 @@ userRoute.post("/register",async(req,res)=>{
                     if(hash){
                         const user=new UserModel({...req.body,password:hash})
                         await user.save()
-                        res.status(200).json({msg:"registered successfully!",user})
+                        return res.status(200).json({msg:"registered successfully!",user})
                     }
                     else{
-                        res.status(200).json({msg:err.message,hash_error})
+                        return res.status(200).json({msg:err.message,hash_error})
                     }
                 })
             }
             else{
-                res.status(200).json({error:"password should contain 8 chars,at lease one uppercase,a special char,a number"})
+                return res.status(200).json({error:"password should contain 8 chars,at lease one uppercase,a special char,a number"})
             }
         }  
     } catch (error) {
-        res.status(400).json({msg:error.message,error:"catchblock"})
+        return res.status(400).json({msg:error.message,error:"catchblock"})
     }
 })
 
-userRoute.post("/login",async(req,res)=>{
-    const {email,password}=req.body
+userRoute.post("/login", async (req, res) => {
     try {
-        const match=await UserModel.findOne({email})
-        console.log(match,'51')
-        if(match){
-            bcrypt.compare(password,match.password,async(result,err)=>{
-                console.log(match.password)
-                if(result){
-                    const token=jwt.sign({userId:match._id},process.env.secret_key)
-                    //console.log(match._id,"60")
-                    console.log(match)
-                    res.status(200).json({msg:"Login successfull!",match,token})
-                }
-                else{
-                    console.log('error')
-                    res.status(200).json({msg:err.message})
-                }
-            })
-        } 
-        else{
-            res.status(200).json({msg:'wrong credential'})
-        } 
+        const { email, password } = req.body;
+
+        // Find the user by email
+        const match = await UserModel.findOne({ email });
+        console.log(match,': 52 userroute userinfo ')
+        if (match) {
+            // Compare the passwords using bcrypt
+            const result = await bcrypt.compare(password, match.password);
+            console.log(result,'result userroute 57')
+            if (result) {
+                // Generate a JWT token
+                const token = jwt.sign({ userId: match._id }, process.env.secret_key);
+                console.log(token,': token from userroute 61')
+                return res.status(200).json({ msg: "Login successful!", token,match });
+            } else {
+                console.log(error.message,': 64 error in userroute')
+                return res.status(401).json({ msg: 'Invalid credentials' });
+            }
+        } else {
+            return res.status(401).json({ msg: 'Invalid credentials',error:error.message });
+        }
     } catch (error) {
-        res.status(400).json({msg:error.message,error:"catchblock"})
+        return res.status(500).json({ msg: 'Internal server error',error:error.message });
     }
-})
+});
 
 userRoute.get("/logout",(req,res)=>{
     try {
         const token=req.headers.authorization?.split(" ")[1]
         console.log(token)
         blacklist.push(token)
-        res.status(200).json({msg:"Logout successfull!!"})
+        return res.status(200).json({msg:"Logout successfull!!"})
     } catch (error) {
         res.status(400).json({msg:error.message})
     }
