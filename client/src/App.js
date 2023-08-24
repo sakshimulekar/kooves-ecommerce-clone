@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 
 
+
 const App = () => {
   useEffect(()=>{
     let token = localStorage.getItem('userInfo')
@@ -16,6 +17,7 @@ const App = () => {
       <ColorModeProvider options={{ initialColorMode: 'light', useSystemColorMode: false }}>
         <NavBar/>
         <MainRoute/>
+        
       </ColorModeProvider>
     </ChakraProvider>
   );

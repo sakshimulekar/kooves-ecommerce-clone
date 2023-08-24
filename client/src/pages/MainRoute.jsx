@@ -5,10 +5,11 @@ import Products from '../pages/Products'
 import Login from '../component/Login'
 import SignUp from '../component/SignUp'
 import Wishlist from '../component/Wishlist/Wishlist'
-import Checkout from '../component/Checkout'
+
 import PrivateRoute from './PrivateRoute'
 import Cart from '../component/Cart'
 import GoogleLoginCallbackPage from '../component/GoogleLoginCallbackPage'
+import PaymentForm from '../component/checkout/PaymentForm'
 
 
 const MainRoute = () => {
@@ -22,9 +23,11 @@ const MainRoute = () => {
         <Route path='/wishlist' element={<PrivateRoute><Wishlist/></PrivateRoute>}/>
         <Route path='/success' element={<GoogleLoginCallbackPage/>}/>
         <Route path='/cart' element={<PrivateRoute>
+
           <Cart/>
         </PrivateRoute>}/>
-        <Route path='/checkout-success' element={<Checkout/>}/>
+        {/* <Route path='/checkout-success' element={<Checkout/>}/> */}
+        <Route path='checkout' element={<PaymentForm/>}/>
       </Routes>
     </>
   )

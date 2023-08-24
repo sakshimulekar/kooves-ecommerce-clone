@@ -24,19 +24,41 @@ export const addCart = (obj) => async(dispatch) => {
     }
 }
 
-export const getCartItem = () => async(dispatch) => {
+// export const getCartItem = () => async(dispatch) => {
+//   const token = Cookies.get('token') || JSON.parse(localStorage.getItem('token')); // Get the token from the cookie
+//     console.log(token,'30')
+//   const headers = {
+//     Authorization: `Bearer ${token}`,
+//   };
+//   try {
+//     const response = await axios.get('http://localhost:8000/cart',{headers})
+//     console.log(response)
+//     let cart = response.data.user.cart
+//     let msg = response.data.msg
+//     dispatch({type:CART_GET,payload:{cart,msg}})
+//   } catch (error) {
+//     console.log(error.message)
+//   }
+// }
+
+export const getCartItem = () => async (dispatch) => {
   const token = Cookies.get('token') || JSON.parse(localStorage.getItem('token')); // Get the token from the cookie
-    console.log(token,'30')
+  console.log(token, '30');
   const headers = {
-    Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
   };
   try {
-    const response = await axios.get('http://localhost:8000/cart',{headers})
-    console.log(response)
-    let cart = response.data.user.cart
-    let msg = response.data.msg
-    dispatch({type:CART_GET,payload:{cart,msg}})
+      const response = await axios.get('http://localhost:8000/cart', { headers });
+      console.log(response.data.user.cart);
+      
+      if (response.data && response.data.user && response.data.user.cart) {
+          const cart = response.data.user.cart;
+          const msg = response.data.msg;
+          dispatch({ type: CART_GET, payload: { cart, msg } });
+      } else {
+          console.log("Cart data not found in response.");
+      }
   } catch (error) {
-    console.log(error.message)
+      console.log(error.message);
   }
-}
+};

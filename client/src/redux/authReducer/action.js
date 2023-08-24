@@ -72,8 +72,8 @@ export const login = (obj) => (dispatch) => {
     .then((res) => {
       console.log(res)
       const token = res.data.token;
-      const user = res.data.user.firstName
-      //console.log(token,"73",user)
+      const user = res.data.match.firstName
+      console.log(token,"|| 73 token and user || ",user)
       // Store the token in a cookie that expires in 7 days
       Cookies.set('token',token)
       Cookies.set('user',user)

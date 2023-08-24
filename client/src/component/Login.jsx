@@ -43,7 +43,7 @@ const Login = () => {
         duration: 5000,
         isClosable: true,
       });
-    } else {
+    } else if(!isAuth) {
       toast({
         title: 'Login Failed',
         status: 'error',

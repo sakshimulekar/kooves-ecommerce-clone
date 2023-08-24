@@ -4,15 +4,16 @@ import {useDispatch, useSelector} from 'react-redux'
 import { getCartItem } from '../redux/CartReducer/action';
 import Caroselimage from './product/Caroselimage';
 import Cookies from 'js-cookie';
-
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
   const [count,setCount] = useState(1)
   const dispatch = useDispatch()
   const cart = useSelector(store=>store.cartReducer.cart)
-  let cartfromcookie = Cookies.get('user')
-  console.log(cartfromcookie)
+  console.log(cart,'cart.jsx 14')
+  //let cartfromcookie = Cookies.get('user')
+  //console.log(cartfromcookie)
   
     
     useEffect(()=>{
@@ -34,7 +35,7 @@ const Cart = () => {
   <Image
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
-    //src={e.product.images}
+    src={e.product.images.image1}
     alt='Caffe Latte'
   />
   
@@ -62,9 +63,11 @@ const Cart = () => {
     </CardBody>
 
     <CardFooter>
-      <Button variant='solid' colorScheme='blue'>
+      <Link to='/checkout'>
+      <Button variant='solid' colorScheme='blue' >
         place order
       </Button>
+      </Link>
     </CardFooter>
   </Stack>
     </Card>
