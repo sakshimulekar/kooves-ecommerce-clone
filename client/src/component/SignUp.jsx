@@ -34,7 +34,7 @@ const SignUp = () => {
   };
 
   return (
-    <VStack spacing={4} maxW="md" m="auto" p={4}>
+    <VStack spacing={4} maxW="md" m="auto" p={4} mt={100}>
       <Input type="text" placeholder="Name" name="name" value={state.name} onChange={handleClick} />
       <Input type="text" placeholder="Last Name" name="last" value={state.last} onChange={handleClick} />
       <Input type="email" placeholder="Email" name="email" value={state.email} onChange={handleClick} />

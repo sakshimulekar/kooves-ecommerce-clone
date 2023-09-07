@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import {ChakraProvider} from "@chakra-ui/react"
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 console.log(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
@@ -16,9 +17,11 @@ root.render(
   <Elements stripe={stripePromise}>
   <ChakraProvider>
     <BrowserRouter>
+      
       <Provider store={store}>
       <App />
       </Provider>
+      
     </BrowserRouter>
   </ChakraProvider>
   </Elements>

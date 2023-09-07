@@ -17,10 +17,12 @@ const GoogleLoginCallbackPage = () => {
     const userData = {
       firstName: searchParams.get('firstName'),
       picture: searchParams.get('picture'),
+      id:searchParams.get('id')
     };
-    
+    console.log(userData)
     localStorage.setItem('token',JSON.stringify(tokenfromurl))
     localStorage.setItem('user',JSON.stringify(userData))
+    
     // Dispatch the action to update the Redux state with user data and token
     dispatch(googleLoginSuccess(userData, tokenfromurl));
 

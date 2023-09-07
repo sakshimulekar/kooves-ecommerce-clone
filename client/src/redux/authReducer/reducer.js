@@ -8,7 +8,7 @@ const initial = {
     isErr: false,
     isAuth: !!Cookies.get('token')|| !!localStorage.getItem('token'),
     token: Cookies.get('token') || JSON.parse(localStorage.getItem('token')) || null,
-    user: Cookies.get('user') || {},
+    user: Cookies.get('user') || JSON.parse(localStorage.getItem('user'))|| {},
   };
   
   

@@ -59,6 +59,7 @@ export const signup = (obj) => (dispatch) => {
   dispatch({ type: LOGIN_REQ });
   axios.post("http://localhost:8000/users/register", obj)
     .then((res) => {
+      console.log(res,'signup 62')
       dispatch({ type: SIGN_SUCCESS, payload: res });
     })
     .catch((err) => {
@@ -72,15 +73,24 @@ export const login = (obj) => (dispatch) => {
     .then((res) => {
       console.log(res)
       const token = res.data.token;
-      const user = res.data.match.firstName
-      console.log(token,"|| 73 token and user || ",user)
+      const userId = res.data.user._id
+      const user = res.data.user.firstName
+      console.log(token,"|| 73 token and user || ",userId)
+      if(token){
+        Cookies.set('token',token)
+      }
+      if(userId){
+        Cookies.set('userId',userId)
+      }
+      if(user){
+        Cookies.set('user',user)
+      }
       // Store the token in a cookie that expires in 7 days
-      Cookies.set('token',token)
-      Cookies.set('user',user)
+      
+      
       //document.cookie = `jsonCookie=${JSON.stringify(user)}`;
 
-      
-      dispatch(loginSuccessWithToken(user,token));
+      dispatch(loginSuccessWithToken(userId,token));
     })
     .catch((err) => {
       console.log(err.message)
@@ -122,6 +132,6 @@ export const googleLoginSuccess = (userData, token) => (dispatch) => {
 
 export const loginSuccessWithToken = (userData,token) => (dispatch) => {
   // You can add logic here to validate the token on the server-side if needed
-  //console.log(token,userData)
+  console.log(userData,'135')
   dispatch({ type: LOGIN_SUCCESS, payload: {userData,token} });
 };

@@ -88,96 +88,51 @@ const NavBar = () => {
         </Menu>
 
         <Menu>
-          <NavLink to={'/product'}>
+          <NavLink to={'/maintainance'}>
             <MenuButton 
             as={Box} 
             cursor="pointer"
             px={2}
-            
-    //py={1}
-    transition='all 0.2s'
-    // borderRadius='md'
-    // borderWidth='1px'
-    fontWeight={'bold'}
-    _hover={{ borderBottomColor: '#FF0080' }}
-    _expanded={{ color:'#FF0080' }}
-    _focus={{ boxShadow: 'outline' }} 
+            transition='all 0.2s'           
+            fontWeight={'bold'}
+            _hover={{ borderBottomColor: '#FF0080' }}
+            _expanded={{ color:'#FF0080' }}
+            _focus={{ boxShadow: 'outline' }} 
             >
               Women <ChevronDownIcon />
             </MenuButton>
           </NavLink>
-          
-          <MenuList borderTopColor={'#FF0080'} borderTopWidth={'thick'} my={4}>
-            <MenuItem>New In</MenuItem>
-            <MenuItem>View All</MenuItem>
-            <MenuItem>T-Shirts</MenuItem>#FF0080
-            <MenuItem>Jackets &amp; Coats</MenuItem>
-            <MenuItem>Hoodies and Sweatshirts</MenuItem>
-            <MenuItem>Sweatpants</MenuItem>
-            <MenuItem>Shorts</MenuItem>
-            <MenuItem>Co-ord Sets</MenuItem>
-            <MenuItem>Gift Card</MenuItem>
-            <MenuItem>Create List</MenuItem>
-          </MenuList>
         </Menu>
 
         <Menu>
+          <NavLink to={'/maintainance'}>
           <MenuButton as={Box} 
             cursor="pointer"
             px={2}
-            
-    //py={1}
-    transition='all 0.2s'
-    // borderRadius='md'
-    // borderWidth='1px'
-    fontWeight={'bold'}
-    _hover={{ borderBottomColor: '#FF0080' }}
-    _expanded={{ color:'#FF0080' }}
-    _focus={{ boxShadow: 'outline' }} >
+            transition='all 0.2s'
+            fontWeight={'bold'}
+            _hover={{ borderBottomColor: '#FF0080' }}
+            _expanded={{ color:'#FF0080' }}
+            _focus={{ boxShadow: 'outline' }} >
             Kids <ChevronDownIcon />
           </MenuButton>
-          <MenuList borderTopColor={'#FF0080'} borderTopWidth={'thick'} my={4}>
-            <MenuItem>New In</MenuItem>
-            <MenuItem>View All</MenuItem>
-            <MenuItem>T-Shirts</MenuItem>
-            <MenuItem>Jackets &amp; Coats</MenuItem>
-            <MenuItem>Hoodies and Sweatshirts</MenuItem>
-            <MenuItem>Sweatpants</MenuItem>
-            <MenuItem>Shorts</MenuItem>
-            <MenuItem>Co-ord Sets</MenuItem>
-            <MenuItem>Gift Card</MenuItem>
-            <MenuItem>Create List</MenuItem>
-          </MenuList>
+          </NavLink>
         </Menu>
 
         <Menu>
+          <NavLink to={'/maintainance'}>
           <MenuButton as={Box} 
             cursor="pointer"
             px={2}
-            
-    //py={1}
-    transition='all 0.2s'
-    // borderRadius='md'
-    // borderWidth='1px'
-    
-    _hover={{ borderBottomColor: '#f51e89' }}
-    _expanded={{ color:'rgb(255, 0, 128)' }}
-    _focus={{ boxShadow: 'outline' }} fontWeight={'bold'}>
+            transition='all 0.2s'
+            _hover={{ borderBottomColor: '#f51e89' }}
+            _expanded={{ color:'rgb(255, 0, 128)' }}
+            _focus={{ boxShadow: 'outline' }} fontWeight={'bold'}>
             Collection <ChevronDownIcon />
           </MenuButton>
-          <MenuList borderTopColor={'#FF0080'} my={4} borderTopWidth={'thick'}>
-            <MenuItem>New In</MenuItem>
-            <MenuItem>View All</MenuItem>
-            <MenuItem>T-Shirts</MenuItem>
-            <MenuItem>Jackets &amp; Coats</MenuItem>
-            <MenuItem>Hoodies and Sweatshirts</MenuItem>
-            <MenuItem>Sweatpants</MenuItem>
-            <MenuItem>Shorts</MenuItem>
-            <MenuItem>Co-ord Sets</MenuItem>
-            <MenuItem>Gift Card</MenuItem>
-            <MenuItem>Create List</MenuItem>
-          </MenuList>
+          </NavLink>
         </Menu>
+        
       </Stack>
 
       {/* Middle */}

@@ -1,4 +1,4 @@
-import { CART_ADD, CART_GET } from "./actionType";
+import { CART_ADD, CART_DEL, CART_GET } from "./actionType";
 
 const initial = {
     isLoad: false,
@@ -13,6 +13,8 @@ export const reducer = (state = initial, { type, payload }) => {
             return { ...state, isLoad: false, cart: payload.cart, msg: payload.msg };
         case CART_ADD:
             return { ...state, isLoad: false,  msg: payload.msg };
+        case CART_DEL:
+            return {...state,isLoad: false,  msg: payload.msg}
         default:
             return state;
     }
