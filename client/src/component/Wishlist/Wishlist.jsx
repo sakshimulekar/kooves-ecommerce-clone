@@ -37,7 +37,7 @@ const Wishlist = () => {
 
       {!isLoad && wishlist?.length==0 && <>
         
-        <Box pl={'50px'}>
+        <Box pl={'40px'}>
           <EmptyWishlist/>
         </Box>
         <Center>
@@ -90,7 +90,7 @@ const Wishlist = () => {
 
     <CardFooter>
       <Button variant='solid' colorScheme='blue' onClick={()=>handleDelete(e._id)}>
-        Move to Wishlist
+        Move to Cart
       </Button>
     </CardFooter>
   </Stack>

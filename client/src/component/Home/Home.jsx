@@ -3,7 +3,6 @@ import SingleHomeCard from './SingleHomeCard'
 import { Box, Button, Center, Heading } from '@chakra-ui/react'
 import Logos from './Logos'
 import ImageCarousel from './ImageCarousel'
-import Footer from '../Footer'
 import { homewomendata } from '../../utils/Homewomendata'
 import Products from '../../pages/Products'
 import carosel1 from "../../Assest/carosel1.gif"
@@ -22,6 +21,7 @@ import carosel11 from "../../Assest/carosel11.avif"
 import carosel12 from "../../Assest/carosel12.avif"
 import carosel13 from "../../Assest/carosel13.avif"
 import banner1 from "../../Assest/banner1.avif"
+import { Footer } from '../Footer/Footer'
 const videos=[carosel1,carosel2,carosel3,carosel4,carosel5,carosel6,carosel7]
 const bankstrip=[bankstrip1,bankstip2,bankstrip3]
 const caroselArr=[carosel9,carosel10,carosel11,carosel12,carosel13]
