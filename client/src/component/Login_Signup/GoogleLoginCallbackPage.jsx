@@ -1,9 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { googleLoginSuccess } from '../redux/authReducer/action';
+import { googleLoginSuccess } from '../../redux/authReducer/action';
+import { useLocation, useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify'
+// import { useToast } from '@chakra-ui/react';
+
 
 const GoogleLoginCallbackPage = () => {
   const dispatch = useDispatch();
+  //const toast = useToast({position:"top"})
+  const location = useLocation()
+  const navigate = useNavigate()
   const isAuth = useSelector((store) => store.authReducer.token);
     console.log(isAuth,'8')
   useEffect(() => {
@@ -23,16 +30,18 @@ const GoogleLoginCallbackPage = () => {
     localStorage.setItem('token',JSON.stringify(tokenfromurl))
     localStorage.setItem('user',JSON.stringify(userData))
     
-    // Dispatch the action to update the Redux state with user data and token
-    dispatch(googleLoginSuccess(userData, tokenfromurl));
+    dispatch(googleLoginSuccess(userData, tokenfromurl))
+    toast('🥳 login successfully!',{style:{fontWeight:'bold',fontSize:'20px',color:"black"}})
+    
+    console.log(location.state,'31')
+    const { from } = location.state || { from: { pathname: '/' } };
+    navigate(from);
 
-    // Redirect the user to the desired page after successful login
-    // window.location.href = '/dashboard'; // Replace with the desired page
   }, [dispatch]);
 
   console.log(isAuth);
 
-  return <div>Logging in...</div>; // Or you can show a loading spinner
+  return <div style={{marginTop:'20%'}}>Logging in...</div>; // Or you can show a loading spinner
 };
 
 export default GoogleLoginCallbackPage;

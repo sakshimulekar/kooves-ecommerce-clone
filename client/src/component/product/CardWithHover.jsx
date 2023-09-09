@@ -25,8 +25,9 @@ const ProductCard = ({images,color,title,price,brand,handleIconClick,handleSecCl
   
   return (
 
-    <Card boxShadow={'md'} margin={'auto'} >
+    <Card boxShadow={'md'} margin={'auto'}  h={500}>
     <Box
+      minHeight={200}
       maxW="sm"
       overflow="hidden"
       position="relative"
@@ -38,6 +39,8 @@ const ProductCard = ({images,color,title,price,brand,handleIconClick,handleSecCl
       src={isCardHovered?(images['image2']):(images['image1'])}
       alt={title}
       w={'100%'}
+      minHeight={100}
+      
       />
       {isCardHovered && (
         <Box

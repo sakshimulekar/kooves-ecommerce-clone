@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { deleteItemfromCart } from '../redux/CartReducer/action'
+import { deleteItemfromCart } from '../../redux/CartReducer/action'
 
 const DeleteCartItem = () => {
     const {id} = useParams()

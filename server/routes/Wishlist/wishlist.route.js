@@ -118,10 +118,10 @@ wishlistRoute.delete("/delete/:productId", auth, async (req, res) => {
   const productId = req.params.productId; // Get the productId from the request URL parameter
 
   const userId = req.user._id; // Assuming you set the user object in the request during authentication middleware.
-
+  console.log(userId,productId,": 121 wishlist userid, productid")
   try {
     const user = await UserModel.findById(userId);
-
+    console.log(user,': 124 user from wishlist')
     if (!user.wishlist.includes(productId)) {
       // If the product is not in the wishlist, return an error
       return res.status(400).json({ error: 'Product not found in the wishlist' });
@@ -131,7 +131,7 @@ wishlistRoute.delete("/delete/:productId", auth, async (req, res) => {
     user.wishlist = user.wishlist.filter((item) => item.toString() !== productId);
     await user.save();
 
-    return res.status(200).json({ message: 'Product removed from wishlist successfully' });
+    return res.status(200).json({ message: 'Product removed from wishlist successfully',wishlist:user.wishlist });
   } catch (error) {
     console.error('Error removing product from wishlist:', error);
     return res.status(500).json({ error: 'Could not remove product from wishlist' });

@@ -1,45 +1,47 @@
 // ModalComponent.js
-import React, { useState } from 'react';
-import {Button,Grid,Badge, Box,Flex, Modal, ModalOverlay,Heading, ModalContent, ModalHeader, ModalCloseButton, ModalBody,Image,Text } from '@chakra-ui/react';
+import React, { useEffect, useRef, useState } from 'react';
+import {Button,Grid,Badge, Box,Flex, Modal, ModalOverlay,Heading, ModalContent, ModalHeader, ModalCloseButton, ModalBody,Image,Text, useToast } from '@chakra-ui/react';
 import Caroselimage from './Caroselimage';
 import RatingStars from './RatingStars';
 import {useDispatch, useSelector} from 'react-redux'
 import { addCart } from '../../redux/CartReducer/action';
 // Inside the ModalComponent component
 import {useNavigate} from 'react-router-dom'
+
+
 const ModalComponent = ({ closeModal, product }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const toast = useToast({position:'top'})
   const isAuth = useSelector(store=>store.authReducer.isAuth)
+  const {msg,isLoad} = useSelector(store=>store.cartReducer)
   const [count,setCount] = useState(1)
+  const [isToastMsg,setIsToastMsg] = useState(false)
+  let [message,setMessage] = useState(msg)
+  //const [messageRef,setMessageRef] = useState(msg)
   // You can now use the 'product' prop to access the relevant product details
+  //console.log(msg,'18 modalcomponent')
   let ans = product.images
-  console.log(ans)
+  //console.log(ans)
   let a = Object.values(ans)
-  console.log(a)
+  //console.log(a)
 
   console.log(product)
 
-  const handleCart=(id)=>{
+  const handleCart=async(id)=>{
     const quantity = count
     console.log(quantity)
     console.log(id)
     const obj = {id,quantity}
     console.log(obj)
     if(isAuth){
-      dispatch(addCart(obj))
+      await dispatch(addCart(obj))
     }
     else{
-      navigate('/login')
+      navigate('/tablogin')
     }
-    
+    setIsToastMsg(true)
   }
-
-
-
-
-
-
 
 
   return (

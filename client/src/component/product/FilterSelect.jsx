@@ -88,7 +88,7 @@ const FilterSelect = () => {
     
   return (
     <>
-      <Flex>
+      <Flex  pt={10}>
         <Button style={buttonStyle} onClick={onOpen}>Filter <ChevronDownIcon/></Button>
         <Drawer 
             isOpen={isOpen}

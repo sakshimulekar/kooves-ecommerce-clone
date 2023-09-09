@@ -154,7 +154,7 @@ cartRoute.post('/addToCart', async (req, res) => {
   const productId = req.body.id;
   const quantity = req.body.quantity;
   const userId = req.user._id;
-  console.log(productId,'productId',quantity,'quantity',userId,'userId')
+  console.log(productId,'productId',quantity,'quantity',userId,'userId',": 157 caartroute add")
   try {
       const user = await UserModel.findById(userId);
       console.log("user check cartroute :",user)
@@ -165,16 +165,16 @@ cartRoute.post('/addToCart', async (req, res) => {
           // If the product is already in the cart, update its quantity
           existingCartItem.quantity = quantity;
           //await user.save(); // Save the changes to the user's cart
-          return res.status(200).json({ message: 'Product already in cart', cart: user.cart });
+          return res.status(200).json({ msg: 'Product already in cart', cart: user.cart });
       } else {
           // If the product is not in the cart, add it as a new item with the given quantity
           if (productId) {
               const newCartItem = { product: productId, quantity };
               user.cart.push(newCartItem);
               await user.save(); // Save the changes to the user's cart
-              return res.status(200).json({ message: 'Product added to cart successfully', cart: user.cart });
+              return res.status(200).json({ msg: 'Product added to cart successfully', cart: user.cart });
           } else {
-              return res.status(200).json({ message: 'Select the product' });
+              return res.status(200).json({ msg: 'Select the product' });
           }
       }
 

@@ -37,7 +37,7 @@ const NavBar = () => {
     localStorage.clear();
     Cookies.remove('token');
     Cookies.remove('user')
-    window.location.href = '/login';
+    window.location.href = '/tablogin';
   };
   return (
     <Flex
@@ -47,7 +47,7 @@ const NavBar = () => {
       padding="1rem"
       backgroundColor={bgColor}
       color={textColor}
-      boxShadow={'lg'}
+      boxShadow={'md'}
       position={'fixed'}
       top={0}
       left={0}
@@ -76,13 +76,13 @@ const NavBar = () => {
           </MenuButton>
           </NavLink>
           
-          <MenuList borderTopColor={'#FF0080'} borderTopWidth={'thick'} my={4}>
+          <MenuList borderTopColor={'#FF0080'} borderTopWidth={'thick'} my={5} pl={3} pr={3}>
             <NavLink><MenuItem textDecorationLine={"none"}>New in</MenuItem></NavLink>
             <MenuItem>View All</MenuItem>
-            <MenuItem>T-Shirts</MenuItem>
-            <MenuItem>Traditional Wear</MenuItem>
-            <MenuItem>Formal Wear</MenuItem>
-            <MenuItem>Shorts</MenuItem>
+            <MenuItem>tshirt</MenuItem>
+            <MenuItem>kurta</MenuItem>
+            <MenuItem>shirt</MenuItem>
+            <MenuItem>short</MenuItem>
             <MenuItem>Footwear</MenuItem>
           </MenuList>
         </Menu>
@@ -159,7 +159,7 @@ const NavBar = () => {
           variant="ghost"
           colorScheme="gray"
           placeholder='profile'
-          onClick={()=>navigate('/login')}
+          onClick={()=>navigate('/tablogin')}
         />
         <Heading fontSize={10} pl={1}>Profile</Heading>
         </Box>

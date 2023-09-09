@@ -2,20 +2,21 @@ import React from 'react'
 import {Routes, Route } from 'react-router-dom'
 import Home from '../component/Home/Home'
 import Products from '../pages/Products'
-import Login from '../component/Login'
-import SignUp from '../component/SignUp'
+import Login from '../component/Login_Signup/Login'
+import SignUp from '../component/Login_Signup/SignUp'
 import Wishlist from '../component/Wishlist/Wishlist'
 
 import PrivateRoute from './PrivateRoute'
 import Cart from '../component/cart/Cart'
-import GoogleLoginCallbackPage from '../component/GoogleLoginCallbackPage'
+import GoogleLoginCallbackPage from '../component/Login_Signup/GoogleLoginCallbackPage'
 import PaymentForm from '../component/checkout/PaymentForm'
 // import Checkout from '../component/checkout/Checkout'
 
-import DeleteCartItem from '../component/DeleteCartItem'
+import DeleteCartItem from '../component/cart/DeleteCartItem'
 import AddressForm from '../component/checkout/AddressForm'
 import { UnderConstruction } from '../component/maintainance/UnderConstruction'
 import Successpayment from '../component/checkout/Successpayment'
+import TabLogin from '../component/Login_Signup/TabLogin'
 
 
 const MainRoute = () => {
@@ -30,6 +31,7 @@ const MainRoute = () => {
         <Route path='/success' element={<GoogleLoginCallbackPage/>}/>
         <Route path='/maintainance' element={<UnderConstruction/>}/>
         <Route path='/successpay' element={<Successpayment/>}/>
+        <Route path='/tablogin' element={<TabLogin/>} />
         <Route path='/cart' element={<PrivateRoute>
           <Cart/>
         </PrivateRoute>}/>

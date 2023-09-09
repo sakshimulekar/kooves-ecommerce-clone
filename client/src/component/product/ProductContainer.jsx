@@ -60,7 +60,7 @@ const ProductContainer = () => {
   return (
     <div>
       <FilterSelect/>
-      <Grid templateColumns='repeat(3, 1fr)' templateRows='repeat(2, 1fr)' gap={10}  w={"70%"} margin={'auto'}>
+      <Grid templateColumns='repeat(4, 1fr)' templateRows='repeat(2, 1fr)' gap={10}  w={"80%"} margin={'auto'} pt={10}>
       {product?.map((e)=>{
         return (
           <ProductCard 

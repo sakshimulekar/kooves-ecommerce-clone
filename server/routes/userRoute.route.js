@@ -17,10 +17,11 @@ const userRoute=express.Router()
 userRoute.post("/register",async(req,res)=>{
     const {email,password,firstName,lastName}=req.body
     try {
-        const match=await UserModel.findOne({email})
-        console.log(match)
-        if(match){
-            return res.status(200).json({msg:"registered already! Please Log-In",user})
+        const user=await UserModel.findOne({email})
+        console.log(user,' : register 21')
+        if(user){
+            console.log('register already')
+            res.status(200).json({msg:"registered already! Please Log-In",user})
         }
         else{
             if(checkPass(password)){
@@ -44,33 +45,35 @@ userRoute.post("/register",async(req,res)=>{
     }
 })
 
-userRoute.post("/login", async (req, res) => {
+userRoute.post('/login',async(req,res)=>{
+    const {email,password} = req.body
     try {
-        const { email, password } = req.body;
-
-        // Find the user by email
-        const match = await UserModel.findOne({ email });
-        console.log(match,': 52 userroute userinfo ')
-        if (match) {
-            // Compare the passwords using bcrypt
-            const result = await bcrypt.compare(password, match.password);
-            console.log(result,'result userroute 57')
-            if (result) {
-                // Generate a JWT token
-                const token = jwt.sign({ userId: match._id }, process.env.secret_key);
-                console.log(token,': token from userroute 61')
-                return res.status(200).json({ msg: "Login successful!", token,match });
-            } else {
-                console.log(error.message,': 64 error in userroute')
-                return res.status(401).json({ msg: 'Invalid credentials' });
-            }
-        } else {
-            return res.status(401).json({ msg: 'Invalid credentials',error:error.message });
+        const user = await UserModel.findOne({email})
+        console.log(user)
+        if(user){
+            console.log('found')
+            bcrypt.compare(password,user.password,async(err,result)=>{
+                if(result){
+                    const token = jwt.sign({userId:user._id},process.env.secret_key)
+                    console.log(token)
+                    return res.status(200).json({msg:'login success',user,token})
+                }
+                else{
+                    return res.status(400).json({err:'invalid credential'})
+                }
+            })
+            //return res.status(200).json({msg:"user found"})
         }
+        else {
+            console.log('not found')
+            return res.status(200).json({msg:"user not found,please Register first"})
+        }
+        
     } catch (error) {
-        return res.status(500).json({ msg: 'Internal server error',error:error.message });
+        console.log(error.message)
+        return res.status(400).json({msg:error.message})
     }
-});
+})
 
 userRoute.get("/logout",(req,res)=>{
     try {

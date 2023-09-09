@@ -89,7 +89,7 @@ const auth = async (req, res, next) => {
       
       if(decoded){
         console.log(decoded,"auth 91 decoded")
-        const userId = decoded.user._id;
+        const userId = decoded.userId;
         console.log(userId,"auth 55 userId")
       const user = await UserModel.findById(userId);
       console.log(userId,"auth 95 user")

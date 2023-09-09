@@ -25,7 +25,7 @@ const TotalCartCalculate = ({total,len}) => {
   const navigate = useNavigate()
   console.log(len,'5')
   return (
-    <Box boxShadow={'md'}  ml={"150px"} pt={5} pb={5} w={'61%'} pl={5} mt={'35PX'}  lineHeight={2}>
+    <Box borderWidth={'0.5px'} borderColor={'grey.200'} borderRadius={'5'} ml={"150px"} pt={5} pb={5} w={'61%'} pl={5} mt={'35PX'}  lineHeight={2}>
       <Text as={'b'}>COUPONS</Text>
       <Flex  justifyContent={'space-between'} alignItems={'center'}  width={'80%'}>
         <Flex alignItems={'center'}>

@@ -20,6 +20,9 @@ stripeRoute.post('/create-payment-intent', async (req, res) => {
   }
 });
 
+// This example sets up an endpoint using the Express framework.
+// Watch this video to get started: https://youtu.be/rPR2aJ6XnAc.
+
 
 // stripeRoute.post('/create-checkout-session', async (req, res) => {
 //   const session = await stripe.checkout.sessions.create({
@@ -43,6 +46,10 @@ stripeRoute.post('/create-payment-intent', async (req, res) => {
 //   res.send({url:session.url});
 // });
 
+
+
+
 module.exports={
     stripeRoute
 }
+

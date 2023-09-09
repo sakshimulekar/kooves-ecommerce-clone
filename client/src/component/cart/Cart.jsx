@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteItemfromCart, getCartItem } from '../../redux/CartReducer/action';
 import { useNavigate } from 'react-router-dom';
 import TotalCartCalculate from './TotalCartCalculate';
+import LoadingCart from '../LottieAnimation/LoadingCart';
+import EmptyCart from '../LottieAnimation/EmptyCartList';
+
 
 
 
@@ -13,7 +16,7 @@ const Cart = () => {
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((store) => store.cartReducer.cart);
+  const {isLoad,isErr,cart} = useSelector((store) => store.cartReducer);
   const [itemCounts, setItemCounts] = useState({});
   const toast = useToast({position:'top'})
   useEffect(() => {
@@ -67,24 +70,27 @@ const Cart = () => {
     console.log(id)
     dispatch(deleteItemfromCart(id))
     .then(()=>{
-      toast({
-        title:'Item Deleted successfully!!',
-        status:'success',
-        duration:3000,
-        isClosable:true
-      })
+      // toast({
+      //   title:'Item Deleted successfully!!',
+      //   status:'success',
+      //   duration:3000,
+      //   isClosable:true
+      // })
       dispatch(getCartItem());
     })
     .catch((error)=>alert("item not deleted",error.message))
   }
   return (
     <Box mt={'20px'} paddingTop={'5%'} pl={20} >
-      {cart.length===0?(<Box w={'100%c'}>
-        <Heading textAlign={'center'}>Hey, It feels so Light!</Heading>
-      <Image margin={'auto'} w={"60%"} src='https://constant.myntassets.com/checkout/assets/img/empty-bag.png'/>
-      
+      <Box>
+        {isLoad && <Box><LoadingCart/></Box>}
+      </Box>
+      {!isLoad && cart.length===0?(<Box w={'80%'} m={'auto'}>
+        <EmptyCart/>
+        <Heading textAlign={'center'} color={'orange'} fontFamily={'cursive'}>Hey, It feels so Light !</Heading>
+        <Heading textAlign={'center'} fontSize={'xl'} fontWeight={'bold'} m={10}>View Wishlist!</Heading>
       </Box>):
-      (<Grid templateColumns='repeat(2, 1fr)'  margin={'auto'} >
+      (!isLoad && <Grid templateColumns='repeat(2, 1fr)'  margin={'auto'} >
       <GridItem >
      
       {cart?.map((e) => (
@@ -119,12 +125,13 @@ const Cart = () => {
               
               <Box py='2'>
                 <Button
+
                   onClick={() => handleIncrement(e.product._id)}
                   isDisabled={e.product.count ? itemCounts[e.product._id] === e.product.count : itemCounts[e.product._id] === 10}
                 >
                   +
                 </Button>
-                <Text display='inline-block' p='2'>
+                <Text display='inline-block' p='2' m={2}>
                   {itemCounts[e.product._id] || 1}
                 </Text>
                 <Button onClick={() => handleDecrement(e.product._id)} isDisabled={itemCounts[e.product._id] === 1}>
