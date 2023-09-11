@@ -32,7 +32,7 @@ const SingleHomeCard = ({data}) => {
   //console.log(data)
   return (
     <>
-    <Flex columnGap={5} bgColor={'blue.900'}  p={10}>
+    <Flex columnGap={5}   p={10}>
       {data?.map((e,i)=>{
         return (
         <Card

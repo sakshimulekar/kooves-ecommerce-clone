@@ -4,7 +4,7 @@ import { ViewIcon,StarIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 
 import { IoHeartCircleSharp } from "react-icons/io5";
-const ProductCard = ({images,color,title,price,brand,handleIconClick,handleSecClick}) => {
+const ProductCard = ({images,color,title,price,rating,brand,handleIconClick,handleSecClick}) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isIconHovered, setIsIconHovered] = useState(false);
   const navigate = useNavigate()
@@ -124,6 +124,8 @@ const ProductCard = ({images,color,title,price,brand,handleIconClick,handleSecCl
     </Heading>
     <Flex fontSize="15px" m="2" justifyContent={'space-between'} alignItems={'center'}>
     <Text>{brand}</Text>
+    <Text>{price}</Text>
+    <Text as={'b'}>{rating}</Text>
     <IconButton
         isRound={true}
         bgColor={color} // Use a specific shade of gray (e.g., gray.50)

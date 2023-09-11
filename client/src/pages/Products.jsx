@@ -11,7 +11,7 @@ const Products = () => {
       <ProductContainer/>
     
       
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   )
 }

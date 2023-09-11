@@ -5,20 +5,24 @@ import ModalComponent from './ModalComponent';
 import FilterSelect from './FilterSelect';
 import {useDispatch, useSelector} from "react-redux"
 import { menProducts } from '../../redux/productReducer/action';
-import { Grid } from '@chakra-ui/react';
+import { Box, Grid,Center } from '@chakra-ui/react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { wishListAction } from '../../redux/WishlistReducer/action';
-
+import LoadingCart from '../LottieAnimation/LoadingCart'
+import Pagination from './Pagination';
+import { Footer } from '../Footer/Footer';
 const ProductContainer = () => {
   const navigate = useNavigate()
   const isAuth = useSelector(store=>store.authReducer.isAuth)
-  const product=useSelector(store=>store.productReducer.products)
+  const {products,isLoad} = useSelector(store=>store.productReducer)
   const wishlist=useSelector(store=>store.wishlistReducer.wishlist)
-  console.log(wishlist)
+  const product = products.products
+  const {totalPages} = products
+  console.log(product,17)
   const [selectedProduct, setSelectedProduct] = useState(null);
-
   const dispatch=useDispatch()
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [page,setPage] = useState(1)
   const [searchParams]=useSearchParams()
   const location=useLocation()
 
@@ -31,34 +35,40 @@ const ProductContainer = () => {
       brand:searchParams.getAll("brand"),
       categories : searchParams.getAll("category"),
       sizes:searchParams.getAll("size"),
-      color:searchParams.getAll("colour")
-      // _sort : searchParams.get("order") && "price",
-      // _order:searchParams.get("order"),
-      // _limit : 3,
+      color:searchParams.getAll("colour"),
+      _sort : searchParams.get("order") && "price",
+      _order:searchParams.get("order"),
+      _rating : searchParams.get("rating"),
+      // _limit : 8,
       // _page : searchParams.get("page"),
     }
   }
 
   const handleIcon=(id)=>{
-    console.log(id)
+    //console.log(id)
   }
   const handleClick=(obj)=>{
-    console.log(obj,'add to wishlist 44')
+    //console.log(obj,'add to wishlist 44')
     if(isAuth){
+      
       dispatch(wishListAction(obj))
     }
     else{
       navigate('/login')
     }
   }
-  //console.log(obj)
+  //console.log(isLoad)
   useEffect(()=>{
-    dispatch(menProducts(obj))
-    console.log(product)
-    console.log(wishlist)
-  },[location.search])
+    //console.log(page,52)
+    dispatch(menProducts(obj,page))
+  },[location.search,page])
   return (
-    <div>
+    <Box>
+     
+        {isLoad && <Box  mt={'10%'}>{<LoadingCart/>}</Box>}
+      
+
+      {!isLoad && <>
       <FilterSelect/>
       <Grid templateColumns='repeat(4, 1fr)' templateRows='repeat(2, 1fr)' gap={10}  w={"80%"} margin={'auto'} pt={10}>
       {product?.map((e)=>{
@@ -73,13 +83,20 @@ const ProductContainer = () => {
         )
       })}
       </Grid>
+      <Grid>
+        <Center m={10} p={10}> 
+          {<Pagination page={page} setPage={setPage} totalPages={totalPages}/>}
+        </Center>
+      </Grid>
         {isModalOpen && selectedProduct && (
         <ModalComponent
           closeModal={toggleModal}
           product={selectedProduct} // Pass the selected product to the ModalComponent
         />
       )}
-    </div>
+      <Footer/>
+      </>}
+    </Box>
   );
 };
 

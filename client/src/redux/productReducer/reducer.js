@@ -11,7 +11,7 @@ export const reducer=(state=initial,{type,payload})=>{
         case PRODUCT_REQ:
             return {...state,isLoad:true}
         case PRODUCT_SUCCESS:
-            return {...state,products:payload}
+            return {...state,products:payload,isLoad:false}
         case PRODUCT_FAIL:
             return {...state,isErr:true}
         default :

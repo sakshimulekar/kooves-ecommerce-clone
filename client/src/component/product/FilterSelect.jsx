@@ -1,9 +1,10 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Button, Drawer, DrawerCloseButton, Tooltip,
-    IconButton,FormLabel,Stack,Checkbox,DrawerOverlay, Flex, useDisclosure,DrawerContent,DrawerHeader,DrawerBody, Box, Input } from '@chakra-ui/react'
+    IconButton,FormLabel,Text,Stack,Checkbox,DrawerOverlay, Flex, useDisclosure,DrawerContent,DrawerHeader,DrawerBody, Box, Input } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SortSelect from './SortSelect'
+import Pagination from './Pagination'
 
 const FilterSelect = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -13,10 +14,17 @@ const FilterSelect = () => {
     const initialcategory=searchParams.getAll("category")
     const initialsize=searchParams.getAll("size")
     const initialcolor=searchParams.getAll("colour")
+    const initialorder = searchParams.get("order")
+    const initialRating = searchParams.get("rating")
+    const [page, setPage] = useState(1)
+    const [order, setorder] = useState(initialorder || "")
+    
     const [brand,setbrand]=useState(initialbrand||[])
     const [category,setcategory]=useState(initialcategory||[])
     const [size,setsize]=useState(initialsize || [])
     const [colour,setcolour]=useState([])
+    const [rating,setRating] = useState(initialRating || "")
+
     const handleclick=(e)=>{
         let val=(e.target.value)
         let newbrand=[...brand]
@@ -69,15 +77,30 @@ const FilterSelect = () => {
         console.log(size)
     }
 
+    const handleSort = (val) => {
+        //const {value} = val
+        setorder(val)
+        console.log(val)
+    }
+
+    const handleRating = (val) =>{
+        setRating(val)
+        console.log(val)
+    }
+
     useEffect(()=>{
         let params={
             brand,
             category,
             size,
-            colour
+            colour,
+           
         }
+        order && (params.order = order)
+        rating && (params.rating = rating)
         setsearchparams(params)
-    },[brand,category,size,colour])
+    },[brand,category,size,colour,order,rating])
+
     const buttonStyle = {
         border: 'none',
         background: 'none',
@@ -215,8 +238,10 @@ const FilterSelect = () => {
                     </Box>
 
                     <Box mb={10}>
+                       
                     <FormLabel>Colour</FormLabel>
                     <Flex>
+                     
                     <Tooltip hasArrow label='blue'>
                     <IconButton
                         isRound={true}
@@ -225,9 +250,7 @@ const FilterSelect = () => {
                         value={'blue'}
                         onClick={handlecolor}
                         defaultChecked={colour.includes("blue")}
-                        
                         m={2}
-                        
                     />
                     </Tooltip>
                     <Tooltip hasArrow label='black'>
@@ -331,9 +354,10 @@ const FilterSelect = () => {
                 </DrawerBody>
             </DrawerContent>
         </Drawer>
-       <SortSelect/>
+       <SortSelect handleSort={handleSort} order = {order} handleRating={handleRating} rating={rating}/>
        
       </Flex>
+    
     </>
   )
 }

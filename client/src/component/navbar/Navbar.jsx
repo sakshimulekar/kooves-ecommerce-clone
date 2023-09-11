@@ -13,6 +13,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Text,
   useColorModeValue,Image, Heading
 } from '@chakra-ui/react';
 import { Link,NavLink, useNavigate } from 'react-router-dom';
@@ -68,11 +69,13 @@ const NavBar = () => {
     transition='all 0.2s'
     // borderRadius='md'
     // borderWidth='1px'
+    
     fontWeight={'bold'}
     _hover={{ borderBottomColor: 'gray.400',color:'#FF0080' }}
     _expanded={{ color:'#ff0080ea' }}
     _focus={{ boxShadow: 'outline' }} >
-            Men <ChevronDownIcon />
+      <Text fontSize={18}>Men <ChevronDownIcon /></Text>
+            
           </MenuButton>
           </NavLink>
           
@@ -99,7 +102,7 @@ const NavBar = () => {
             _expanded={{ color:'#FF0080' }}
             _focus={{ boxShadow: 'outline' }} 
             >
-              Women <ChevronDownIcon />
+              <Text fontSize={18}>Women <ChevronDownIcon /></Text>
             </MenuButton>
           </NavLink>
         </Menu>
@@ -114,7 +117,7 @@ const NavBar = () => {
             _hover={{ borderBottomColor: '#FF0080' }}
             _expanded={{ color:'#FF0080' }}
             _focus={{ boxShadow: 'outline' }} >
-            Kids <ChevronDownIcon />
+            <Text fontSize={18}>Kids <ChevronDownIcon /></Text>
           </MenuButton>
           </NavLink>
         </Menu>
@@ -128,7 +131,7 @@ const NavBar = () => {
             _hover={{ borderBottomColor: '#f51e89' }}
             _expanded={{ color:'rgb(255, 0, 128)' }}
             _focus={{ boxShadow: 'outline' }} fontWeight={'bold'}>
-            Collection <ChevronDownIcon />
+            <Text fontSize={18}>Collection <ChevronDownIcon /></Text>
           </MenuButton>
           </NavLink>
         </Menu>
