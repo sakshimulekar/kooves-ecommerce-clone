@@ -57,7 +57,7 @@ const ProductContainer = () => {
       dispatch(wishListAction(obj))
     }
     else{
-      navigate('/login')
+      navigate('/tablogin')
     }
   }
   //console.log(isLoad)

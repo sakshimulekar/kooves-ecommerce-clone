@@ -112,7 +112,7 @@ const FilterSelect = () => {
   return (
     <>
       <Flex  pt={10} justifyContent={'space-between'} w={"90%"} m='auto'>
-        <Button style={buttonStyle} onClick={onOpen}>Filter <ChevronDownIcon/></Button>
+        <Button style={buttonStyle} onClick={onOpen}>Filter <ChevronDownIcon/> </Button>
         <Drawer 
             isOpen={isOpen}
             onClose={onClose}

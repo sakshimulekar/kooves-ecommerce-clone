@@ -190,12 +190,17 @@ const NavBar = () => {
     />
   </Link>
 ) : ( */}
-  <Input
-    type="text"
-    placeholder="Search for products..."
-    value={searchQuery}
-    onChange={handleInputChange}
-  />
+      <Box>
+        
+        <Input
+          type="text"
+          icon={<FaSearch/>}
+          placeholder="Search for products..."
+          value={searchQuery}
+          onChange={handleInputChange}
+
+        />
+      </Box>
         <Box>
         <IconButton
           aria-label="Login"
