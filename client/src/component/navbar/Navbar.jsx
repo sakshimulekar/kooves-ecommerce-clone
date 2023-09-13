@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -25,14 +25,20 @@ import logo from "../../Assest/StyleHub1.png";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/authReducer/action';
 import Cookies from 'js-cookie'
+import { handleSearch } from '../../redux/productReducer/action';
+//import ProductContainer from '../product/ProductContainer';
 
 
 const NavBar = () => {
+
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {products} = useSelector(store=>store.productReducer)
   const bgColor = useColorModeValue('white', 'gray.700');
   const textColor = useColorModeValue('black', 'white');
-  const dispatch=useDispatch()
-
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  
   const handleLogout = () => {
     dispatch(logout)
     localStorage.clear();
@@ -40,6 +46,31 @@ const NavBar = () => {
     Cookies.remove('user')
     window.location.href = '/tablogin';
   };
+
+  const handleInputChange = (e) =>{
+    setSearchQuery(e.target.value)
+  }
+
+  useEffect(()=>{
+    const timer = setTimeout(() => {
+      dispatch(handleSearch(searchQuery)).then(()=>{
+        
+        navigate('/searchresult')
+        //setSearchQuery("")
+      })
+    }, 2000);
+    return ()=>{
+      clearTimeout(timer)
+    }
+  },[searchQuery,dispatch])
+
+  const handleSearchResuts = () => {
+    setSearchResults(products)
+    console.log(searchResults,'65')
+  }
+  
+  console.log(products,'68')
+
   return (
     <Flex
       as="nav"
@@ -149,12 +180,22 @@ const NavBar = () => {
 
       {/* Right side */}
       <Stack direction="row" spacing={4} align="center">
-        <InputGroup >
-          <InputLeftElement pointerEvents="none">
-            <Icon as={FaSearch} color="gray.400" />
-          </InputLeftElement>
-          <Input type="text" placeholder="Search" />
-        </InputGroup>
+      {/* {searchResults.length > 0 ? (
+  <Link to="/searchresult">
+    <Input
+      type="text"
+      placeholder="Search for products..."
+      value={searchQuery}
+      onChange={handleInputChange}
+    />
+  </Link>
+) : ( */}
+  <Input
+    type="text"
+    placeholder="Search for products..."
+    value={searchQuery}
+    onChange={handleInputChange}
+  />
         <Box>
         <IconButton
           aria-label="Login"

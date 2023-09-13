@@ -28,7 +28,7 @@ const ProductCard = ({images,color,title,price,rating,brand,handleIconClick,hand
     <Card boxShadow={'md'} margin={'auto'}  h={500}>
     <Box
       minHeight={200}
-      maxW="sm"
+      maxW="md"
       overflow="hidden"
       position="relative"
       onMouseEnter={handleCardMouseEnter}

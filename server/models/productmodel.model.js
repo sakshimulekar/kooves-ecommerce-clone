@@ -22,7 +22,7 @@ const footwearSchema = new mongoose.Schema({
   rating: Number,
   count: Number
 });
-
+footwearSchema.index({ title: 'text',categories:'text',category:'text',description:'text'});
 // Define the schema for the "women's clothing" collection
 const clothingSchema = new mongoose.Schema({
   id: Number,

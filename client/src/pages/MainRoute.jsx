@@ -17,6 +17,7 @@ import AddressForm from '../component/checkout/AddressForm'
 import { UnderConstruction } from '../component/maintainance/UnderConstruction'
 import Successpayment from '../component/checkout/Successpayment'
 import TabLogin from '../component/Login_Signup/TabLogin'
+import SearchResult from '../component/product/SearchResult'
 
 
 const MainRoute = () => {
@@ -32,6 +33,7 @@ const MainRoute = () => {
         <Route path='/maintainance' element={<UnderConstruction/>}/>
         <Route path='/successpay' element={<Successpayment/>}/>
         <Route path='/tablogin' element={<TabLogin/>} />
+        <Route path='/searchresult' element={<SearchResult/>} />
         <Route path='/cart' element={<PrivateRoute>
           <Cart/>
         </PrivateRoute>}/>

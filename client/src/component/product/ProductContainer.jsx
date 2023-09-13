@@ -11,14 +11,17 @@ import { wishListAction } from '../../redux/WishlistReducer/action';
 import LoadingCart from '../LottieAnimation/LoadingCart'
 import Pagination from './Pagination';
 import { Footer } from '../Footer/Footer';
+
 const ProductContainer = () => {
+
   const navigate = useNavigate()
   const isAuth = useSelector(store=>store.authReducer.isAuth)
   const {products,isLoad} = useSelector(store=>store.productReducer)
   const wishlist=useSelector(store=>store.wishlistReducer.wishlist)
   const product = products.products
-  const {totalPages} = products
-  console.log(product,17)
+  console.log(product,'22')
+  const totalPages = products.totalPages
+  console.log(products,17)
   const [selectedProduct, setSelectedProduct] = useState(null);
   const dispatch=useDispatch()
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,12 +65,12 @@ const ProductContainer = () => {
     //console.log(page,52)
     dispatch(menProducts(obj,page))
   },[location.search,page])
+
   return (
     <Box>
      
         {isLoad && <Box  mt={'10%'}>{<LoadingCart/>}</Box>}
       
-
       {!isLoad && <>
       <FilterSelect/>
       <Grid templateColumns='repeat(4, 1fr)' templateRows='repeat(2, 1fr)' gap={10}  w={"80%"} margin={'auto'} pt={10}>
@@ -96,6 +99,8 @@ const ProductContainer = () => {
       )}
       <Footer/>
       </>}
+
+
     </Box>
   );
 };

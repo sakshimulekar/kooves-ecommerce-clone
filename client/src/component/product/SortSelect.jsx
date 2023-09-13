@@ -31,7 +31,7 @@ const SortSelect = ({handleSort,order,handleRating,rating}) => {
            
             isOpen={isOpen}
             onClose={onClose}
-            placement='left'
+            placement='right'
         >
             <DrawerOverlay/>
             <DrawerContent >
