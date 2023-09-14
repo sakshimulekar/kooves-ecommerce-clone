@@ -28,22 +28,31 @@ const caroselArr=[carosel9,carosel10,carosel11,carosel12,carosel13]
 const Home = () => {
   
   return (
-    <Box mt={20}>
+    <Box mt={20} >
         {/* this imagecarsosel we use for single product page */}
         <ImageCarousel videos={videos}/>
         <ImageCarousel videos={bankstrip}/>
-        <Box bgColor={'gold'}>
-        <center>Shop Women's</center>
+        <Box bgColor={'gold'} p={2} mt={2}>
+        <center as='b' >Shop Women's</center>
         </Box>
        
-        
+        <Box  >
         <SingleHomeCard data={homewomendata}/>
-        
+        </Box>
         <ImageCarousel videos={caroselArr}/>
-        <Heading>Shop Men's</Heading>
-        <center><Button>View More</Button></center>
+        <Box backgroundColor={'gold'} mt={2}>
+        
+        <Center as='b' p={1}><Button backgroundColor={'transparent'}>View More</Button></Center>
+        </Box>
+        <Box>
+        <SingleHomeCard data={homewomendata}/>
+        </Box>
         <img src={banner1} alt='banner' width={'100%'}/>
-        <Logos/>
+        <Box m={5}>
+          <Center m={2}><Heading>Our Popular Brand</Heading></Center>
+          <Logos/>
+        </Box>
+      
         
         <Footer/>
 

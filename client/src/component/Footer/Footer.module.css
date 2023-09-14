@@ -36,7 +36,7 @@
     border: '1px solid red';
     
     display: block;
-    margin-left: 50%;
+    margin-left: 35%;
     margin-top: 10px;
     margin-bottom: 20px;
 
@@ -90,7 +90,28 @@
   span {
     font-size: 12px;
   }
+   @media (max-width: 1024px) {
+    .logo_language {
+      border: '1px solid red';
+      
+      display: block;
+      margin-left: 40%;
+      margin-top: 10px;
+      margin-bottom: 20px;
   
+    }
+   }
+   @media (min-width: 1024px) {
+    .logo_language {
+      border: '1px solid red';
+      
+      display: block;
+      margin-left: 45%;
+      margin-top: 10px;
+      margin-bottom: 20px;
+  
+    }
+   }
   @media (max-width: 550px) {
     .footer_link_container {
       grid-template-columns: repeat(2, 1fr);
@@ -102,8 +123,9 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  @media (max-width: 400px) {
+  @media (max-width: 412px) {
     .logo_language {
       display: block;
+      margin-left: 35%;
     }
   }

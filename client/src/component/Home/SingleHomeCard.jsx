@@ -12,9 +12,10 @@ import {
   Divider,
   IconButton,
   Button,
-  
+  Box,
   useColorModeValue,
-  Skeleton
+  Skeleton,
+  Center
 } from '@chakra-ui/react';
 import { ArrowForwardIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
@@ -30,9 +31,74 @@ const SingleHomeCard = ({data}) => {
     navigation(link)
   };
   //console.log(data)
+  const isMobile = window.innerWidth < 768; // Define a breakpoint for mobile
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; // Define a breakpoint for tablet
   return (
-    <>
-    <Flex columnGap={5}   p={10}>
+    <Box >
+    {(isMobile && !isTablet) && (
+      <Flex  m={'auto'} gap={2} p={2}>
+      {data?.map((e,i)=>{
+        return (
+        <Card
+          key={i}
+          w={'100%'}
+          height="130px"
+          overflow="hidden"
+          transition="transform 0.3s ease-out"
+          _hover={{ transform: 'scale(0.95)', cursor: 'pointer' }}
+        >
+            <CardBody >
+                <Box  w={"100%"}>
+              <Image
+                src={e.image}
+                alt="Green double couch with wooden legs"
+                w={'250%'}
+                mr={10}
+              />
+              </Box>
+              <Box  m={'auto'}>
+                <Button backgroundColor={'transparent'} onClick={()=>handleRedirect(e.link)}><Center fontSize={8} >{e.text}</Center></Button>
+              </Box>  {/* </Flex> */}
+            </CardBody>
+        </Card>
+        )
+        })}
+      </Flex>
+    )}
+
+    {(!isMobile && isTablet) && (
+          <Flex  m={'auto'} gap={2} p={2}>
+          {data?.map((e,i)=>{
+            return (
+            <Card
+              key={i}
+              w={'100%'}
+              height="280px"
+              overflow="hidden"
+              transition="transform 0.3s ease-out"
+              _hover={{ transform: 'scale(0.95)', cursor: 'pointer' }}
+            >
+                <CardBody >
+                    <Box  w={"100%"}>
+                  <Image
+                    src={e.image}
+                    alt="Green double couch with wooden legs"
+                    w={'250%'}
+                    mr={10}
+                  />
+                  </Box>
+                  <Box  m={'auto'}>
+                    <Button backgroundColor={'transparent'} onClick={()=>handleRedirect(e.link)}><Center fontSize={8} >{e.text}</Center></Button>
+                  </Box>  {/* </Flex> */}
+                </CardBody>
+            </Card>
+            )
+            })}
+          </Flex>
+        )}
+
+    {(!isMobile && !isTablet) && (
+      <Flex columnGap={5} p={10}>
       {data?.map((e,i)=>{
         return (
         <Card
@@ -79,7 +145,9 @@ const SingleHomeCard = ({data}) => {
       )
       })}
     </Flex>
-    </>
+    )}
+    
+    </Box>
   );
 };
 
