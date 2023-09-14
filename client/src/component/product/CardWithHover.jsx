@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Image, Heading, Text, Icon, Card,Tooltip,Grid,IconButton,Flex } from '@chakra-ui/react';
 import { ViewIcon,StarIcon } from '@chakra-ui/icons';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { IoHeartCircleSharp } from "react-icons/io5";
-const ProductCard = ({images,color,title,price,rating,brand,handleIconClick,handleSecClick}) => {
+const ProductCard = ({e,_id,images,color,title,price,rating,brand,handleIconClick,handleSecClick,handleIcon}) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isIconHovered, setIsIconHovered] = useState(false);
   const navigate = useNavigate()
@@ -17,9 +17,9 @@ const ProductCard = ({images,color,title,price,rating,brand,handleIconClick,hand
     setIsCardHovered(false);
   };
 
-  const handleTextClick = () => {
+  const handleTextClick = (id) => {
     // Add your logic for handling the icon click here
-    console.log("click")
+    console.log(id,"id")
   };
   //console.log(title.length)
   
@@ -97,6 +97,7 @@ const ProductCard = ({images,color,title,price,rating,brand,handleIconClick,hand
       
         </Box>
       )}
+        {/* <Link to={`/Product/${_id}`}> */}
         <Box
           fontSize="15px"
           fontWeight="bold"
@@ -111,12 +112,13 @@ const ProductCard = ({images,color,title,price,rating,brand,handleIconClick,hand
           opacity={isCardHovered ? 1 : 0}
           transition="opacity 0.2s ease-in-out"
           cursor={'pointer'}
-          onClick={handleTextClick}
+          onClick={()=>handleIcon()}
         >
           <Tooltip label='view more' fontSize='md'>
             Select option
           </Tooltip>
         </Box>
+        {/* </Link> */}
 
     </Box>
     <Heading fontSize="20px" fontWeight="bold" m="3">

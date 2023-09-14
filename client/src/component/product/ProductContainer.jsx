@@ -11,6 +11,7 @@ import { wishListAction } from '../../redux/WishlistReducer/action';
 import LoadingCart from '../LottieAnimation/LoadingCart'
 import Pagination from './Pagination';
 import { Footer } from '../Footer/Footer';
+import SingleProduct from './SingleProduct';
 
 const ProductContainer = () => {
 
@@ -28,7 +29,8 @@ const ProductContainer = () => {
   const [page,setPage] = useState(1)
   const [searchParams]=useSearchParams()
   const location=useLocation()
-
+  const [openPage,setOpenPage] = useState(false)
+  const [productSelect,setProductSelect] = useState(null)
   const toggleModal = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(prevState => !prevState);
@@ -48,7 +50,10 @@ const ProductContainer = () => {
   }
 
   const handleIcon=(id)=>{
-    //console.log(id)
+    console.log(id,"51")
+    setProductSelect(id)
+    setOpenPage(p=> !p)
+    navigate(`/Product/${id}`)
   }
   const handleClick=(obj)=>{
     //console.log(obj,'add to wishlist 44')
@@ -96,7 +101,12 @@ const ProductContainer = () => {
           closeModal={toggleModal}
           product={selectedProduct} // Pass the selected product to the ModalComponent
         />
-      )}
+        )}
+        {/* {openPage && openPage && (
+          <SingleProduct 
+            product = {productSelect}
+          />
+        )} */}
       <Footer/>
       </>}
 

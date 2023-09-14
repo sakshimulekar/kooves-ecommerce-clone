@@ -2,6 +2,17 @@ const express = require("express");
 const { FootwearModel } = require("../../models/productmodel.model");
 const menRoute = express.Router();
 
+menRoute.get('/top/:id',async(req,res)=>{
+  let {id} = req.params
+  try {
+    const product = await FootwearModel.findById(id)
+    console.log(product)
+    res.status(200).json({product:product})
+  } catch (error) {
+    res.status(401).json({msg:error.message})
+  }
+})
+
 menRoute.get("/:page", async (req, res) => {
   let {page} = req.params
   try {

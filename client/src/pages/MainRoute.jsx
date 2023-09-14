@@ -18,6 +18,7 @@ import { UnderConstruction } from '../component/maintainance/UnderConstruction'
 import Successpayment from '../component/checkout/Successpayment'
 import TabLogin from '../component/Login_Signup/TabLogin'
 import SearchResult from '../component/product/SearchResult'
+import SingleProduct from '../component/product/SingleProduct'
 
 
 const MainRoute = () => {
@@ -28,6 +29,7 @@ const MainRoute = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<SignUp/>}/>
         <Route path='/product' element={<Products/>}/>
+        <Route path='/Product/:id' element={<SingleProduct/>}/>
         <Route path='/wishlist' element={<PrivateRoute><Wishlist/></PrivateRoute>}/>
         <Route path='/success' element={<GoogleLoginCallbackPage/>}/>
         <Route path='/maintainance' element={<UnderConstruction/>}/>
