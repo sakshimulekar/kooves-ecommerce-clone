@@ -13,12 +13,18 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Text,
-  useColorModeValue,Image, Heading
+  Text,Button,
+  useColorModeValue,Image,Heading,useDisclosure,
+    Drawer,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    DrawerHeader,
+    DrawerBody, DrawerFooter, Collapse
 } from '@chakra-ui/react';
 import { Link,NavLink, useNavigate } from 'react-router-dom';
-import { FaSearch, FaUser, FaStar, FaShoppingBag } from 'react-icons/fa';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { FaSearch, FaUser, FaStar,FaSignOutAlt, FaShoppingBag, FaBars } from 'react-icons/fa';
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import ThemeToggle from '../themeToggle';
 import logoName from "../../Assest/StyleHub2.png"
 import logo from "../../Assest/StyleHub1.png";
@@ -38,7 +44,8 @@ const NavBar = () => {
   const textColor = useColorModeValue('black', 'white');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const handleLogout = () => {
     dispatch(logout)
     localStorage.clear();
@@ -68,7 +75,8 @@ const NavBar = () => {
     setSearchResults(products)
     console.log(searchResults,'65')
   }
-  
+  const isMobile = window.innerWidth < 768; // Define a breakpoint for mobile
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; // Define a breakpoint for tablet
   console.log(products,'68')
 
   return (
@@ -85,10 +93,18 @@ const NavBar = () => {
       left={0}
       right={0}
       zIndex={1}
-      
     >
+      {(isMobile || isTablet) && (
+        <IconButton
+          aria-label='Open Menu'
+          icon={<FaBars/>}
+          onClick={onOpen}
+          variant={'ghost'}
+          colorScheme='gray'/>
+      )}
       {/* Left side */}
-      <Stack direction="row" spacing={4}>
+      {(!isMobile && !isTablet) && (
+        <Stack direction="row" spacing={4}>
         
         <Menu>
           <NavLink to={'/product'}>
@@ -96,150 +112,325 @@ const NavBar = () => {
             cursor="pointer"
             px={2}
             
-    //py={1}
-    transition='all 0.2s'
-    // borderRadius='md'
-    // borderWidth='1px'
-    
-    fontWeight={'bold'}
-    _hover={{ borderBottomColor: 'gray.400',color:'#FF0080' }}
-    _expanded={{ color:'#ff0080ea' }}
-    _focus={{ boxShadow: 'outline' }} >
-      <Text fontSize={18}>Men <ChevronDownIcon /></Text>
-            
-          </MenuButton>
-          </NavLink>
-          
-          <MenuList borderTopColor={'#FF0080'} borderTopWidth={'thick'} my={5} pl={3} pr={3}>
-            <NavLink><MenuItem textDecorationLine={"none"}>New in</MenuItem></NavLink>
-            <MenuItem>View All</MenuItem>
-            <MenuItem>tshirt</MenuItem>
-            <MenuItem>kurta</MenuItem>
-            <MenuItem>shirt</MenuItem>
-            <MenuItem>short</MenuItem>
-            <MenuItem>Footwear</MenuItem>
-          </MenuList>
-        </Menu>
+          transition='all 0.2s'
+          fontWeight={'bold'}
+          _hover={{ borderBottomColor: 'gray.400',color:'#FF0080' }}
+          _expanded={{ color:'#ff0080ea' }}
+          _focus={{ boxShadow: 'outline' }} >
+            <Text fontSize={18}>Men <ChevronDownIcon /></Text>
+                  
+                </MenuButton>
+                </NavLink>
+                
+                <MenuList borderTopColor={'#FF0080'} borderTopWidth={'thick'} my={5} pl={3} pr={3}>
+                  <NavLink><MenuItem textDecorationLine={"none"}>New in</MenuItem></NavLink>
+                  <MenuItem>View All</MenuItem>
+                  <MenuItem>tshirt</MenuItem>
+                  <MenuItem>kurta</MenuItem>
+                  <MenuItem>shirt</MenuItem>
+                  <MenuItem>short</MenuItem>
+                  <MenuItem>Footwear</MenuItem>
+                </MenuList>
+              </Menu>
 
-        <Menu>
-          <NavLink to={'/maintainance'}>
-            <MenuButton 
-            as={Box} 
-            cursor="pointer"
-            px={2}
-            transition='all 0.2s'           
-            fontWeight={'bold'}
-            _hover={{ borderBottomColor: '#FF0080' }}
-            _expanded={{ color:'#FF0080' }}
-            _focus={{ boxShadow: 'outline' }} 
-            >
-              <Text fontSize={18}>Women <ChevronDownIcon /></Text>
-            </MenuButton>
-          </NavLink>
-        </Menu>
+              <Menu>
+                <NavLink to={'/maintainance'}>
+                  <MenuButton 
+                  as={Box} 
+                  cursor="pointer"
+                  px={2}
+                  transition='all 0.2s'           
+                  fontWeight={'bold'}
+                  _hover={{ borderBottomColor: '#FF0080' }}
+                  _expanded={{ color:'#FF0080' }}
+                  _focus={{ boxShadow: 'outline' }} 
+                  >
+                    <Text fontSize={18}>Women <ChevronDownIcon /></Text>
+                  </MenuButton>
+                </NavLink>
+              </Menu>
 
-        <Menu>
-          <NavLink to={'/maintainance'}>
-          <MenuButton as={Box} 
-            cursor="pointer"
-            px={2}
-            transition='all 0.2s'
-            fontWeight={'bold'}
-            _hover={{ borderBottomColor: '#FF0080' }}
-            _expanded={{ color:'#FF0080' }}
-            _focus={{ boxShadow: 'outline' }} >
-            <Text fontSize={18}>Kids <ChevronDownIcon /></Text>
-          </MenuButton>
-          </NavLink>
-        </Menu>
+              <Menu>
+                <NavLink to={'/maintainance'}>
+                <MenuButton as={Box} 
+                  cursor="pointer"
+                  px={2}
+                  transition='all 0.2s'
+                  fontWeight={'bold'}
+                  _hover={{ borderBottomColor: '#FF0080' }}
+                  _expanded={{ color:'#FF0080' }}
+                  _focus={{ boxShadow: 'outline' }} >
+                  <Text fontSize={18}>Kids <ChevronDownIcon /></Text>
+                </MenuButton>
+                </NavLink>
+              </Menu>
 
-        <Menu>
-          <NavLink to={'/maintainance'}>
-          <MenuButton as={Box} 
-            cursor="pointer"
-            px={2}
-            transition='all 0.2s'
-            _hover={{ borderBottomColor: '#f51e89' }}
-            _expanded={{ color:'rgb(255, 0, 128)' }}
-            _focus={{ boxShadow: 'outline' }} fontWeight={'bold'}>
-            <Text fontSize={18}>Collection <ChevronDownIcon /></Text>
-          </MenuButton>
-          </NavLink>
-        </Menu>
-        
-      </Stack>
-
+              <Menu>
+                <NavLink to={'/maintainance'}>
+                <MenuButton as={Box} 
+                  cursor="pointer"
+                  px={2}
+                  transition='all 0.2s'
+                  _hover={{ borderBottomColor: '#f51e89' }}
+                  _expanded={{ color:'rgb(255, 0, 128)' }}
+                  _focus={{ boxShadow: 'outline' }} fontWeight={'bold'}>
+                  <Text fontSize={18}>Collection <ChevronDownIcon /></Text>
+                </MenuButton>
+                </NavLink>
+              </Menu>
+              
+            </Stack>
+      )}
+      
       {/* Middle */}
-      <NavLink to={'/'}>
-        <Box  h={'full'}  padding={'0px,10px'}>
-          <Image src={logoName} w={79}/>
-          <Image src={logo} w={79} />
-        </Box>
-      </NavLink>
+      {(isTablet && !isMobile) && (
+        <NavLink to={'/'}>
+          <Box  h={'full'}   ml={20} pl={40}>
+            <Image src={logoName} w={79}/>
+            <Image src={logo} w={79} />
+          </Box>
+        </NavLink>
+      )}
+      {(!isTablet && isMobile) && (
+        <NavLink to={'/'}>
+          <Box  h={'full'}   >
+            <Image src={logoName} w={79}/>
+            <Image src={logo} w={79} />
+          </Box>
+        </NavLink>
+      )}
+      {(!isTablet && !isMobile) && (
+        <NavLink to={'/'}>
+          <Box  h={'full'}  padding={'0px,10px'}>
+            <Image src={logoName} w={79}/>
+            <Image src={logo} w={79} />
+          </Box>
+        </NavLink>
+      )}
+      
       
 
       {/* Right side */}
-      <Stack direction="row" spacing={4} align="center">
-      {/* {searchResults.length > 0 ? (
-  <Link to="/searchresult">
-    <Input
-      type="text"
-      placeholder="Search for products..."
-      value={searchQuery}
-      onChange={handleInputChange}
-    />
-  </Link>
-) : ( */}
-      <Box>
-        
-        <Input
-          type="text"
-          icon={<FaSearch/>}
-          placeholder="Search for products..."
-          value={searchQuery}
-          onChange={handleInputChange}
-
-        />
-      </Box>
-        <Box>
-        <IconButton
-          aria-label="Login"
-          icon={<FaUser />}
-          variant="ghost"
-          colorScheme="gray"
-          placeholder='profile'
-          onClick={()=>navigate('/tablogin')}
-        />
-        <Heading fontSize={10} pl={1}>Profile</Heading>
+      {(isTablet && !isMobile) && (
+        <Flex  >
+          <Box>
+          <Input
+            type="text"
+            icon={<FaSearch/>}
+            placeholder="Search for products..."
+            value={searchQuery}
+            onChange={handleInputChange}
+          />
         </Box>
+          <Link to={'/cart'}>
+          <IconButton
+            aria-label="Cart"
+            icon={<FaShoppingBag />}
+            variant="ghost"
+            colorScheme="gray"
+          />
+          </Link>
+        </Flex>
+      )}
 
-        <Box>
-        <IconButton
-          aria-label="Wishlist"
-          icon={<FaStar />}
-          variant="ghost"
-          colorScheme="gray"
-          onClick={()=>navigate('/wishlist')}
-        />
-        <Heading fontSize={10} ml={1}>Wishlist</Heading>
-        </Box>
+      {(!isTablet && isMobile) && (
+              <Flex  >
+                <Box  w={60}>
+                <Input
+                  type="text"
+                  icon={<FaSearch/>}
+                  placeholder="Search for products..."
+                  value={searchQuery}
+                  onChange={handleInputChange}
+                />
+              </Box>
+                <Link to={'/cart'}>
+                <IconButton
+                  aria-label="Cart"
+                  icon={<FaShoppingBag />}
+                  variant="ghost"
+                  colorScheme="gray"
+                />
+                </Link>
+              </Flex>
+      )}
 
+      {(!isTablet && !isMobile) && (
+        <Stack direction="row" spacing={4} align="center"> 
         <Box>
-        <Link to={'/cart'}>
-        <IconButton
-          aria-label="Cart"
-          icon={<FaShoppingBag />}
-          variant="ghost"
-          colorScheme="gray"
-        />
-        <Heading fontSize={10} ml={3}>Bag</Heading>
-        </Link>
+          <Input
+            type="text"
+            icon={<FaSearch/>}
+            placeholder="Search for products..."
+            value={searchQuery}
+            onChange={handleInputChange}
+          />
         </Box>
-        <ThemeToggle/>
-        <button onClick={handleLogout}>Logout</button>
+          <Box>
+          <IconButton
+            aria-label="Login"
+            icon={<FaUser />}
+            variant="ghost"
+            colorScheme="gray"
+            placeholder='profile'
+            onClick={()=>navigate('/tablogin')}
+          />
+          <Heading fontSize={10} pl={1}>Profile</Heading>
+          </Box>
+  
+          <Box>
+          <IconButton
+            aria-label="Wishlist"
+            icon={<FaStar />}
+            variant="ghost"
+            colorScheme="gray"
+            onClick={()=>navigate('/wishlist')}
+          />
+          <Heading fontSize={10} ml={1}>Wishlist</Heading>
+          </Box>
+  
+          <Box>
+          <Link to={'/cart'}>
+          <IconButton
+            aria-label="Cart"
+            icon={<FaShoppingBag />}
+            variant="ghost"
+            colorScheme="gray"
+          />
+          <Heading fontSize={10} ml={3}>Bag</Heading>
+          </Link>
+          </Box>
+          <ThemeToggle/>
+          <button onClick={handleLogout}>Logout</button>
+        </Stack>
+      )}
+      
+
+      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader></DrawerHeader>
+          <DrawerBody>
+      <Stack direction="column">
+        <Menu>
+          {({ isOpen }) => (
+            <>
+            <NavLink to={'/product'}>
+              <MenuButton
+                as={Box}
+                cursor="pointer"
+                px={2}
+                transition="all 0.2s"
+                fontWeight="bold"
+                _hover={{ borderBottomColor: 'gray.400', color: '#FF0080' }}
+                _expanded={{ color: '#ff0080ea' }}
+                _focus={{ boxShadow: 'outline' }}
+              >
+                <Text fontSize={18}>Men {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}</Text>
+              </MenuButton>
+              </NavLink>
+              <Collapse in={isOpen}>
+                <MenuList borderTopColor={'#FF0080'} borderTopWidth={'thick'} my={1} pl={3} pr={3}>
+                  <NavLink><MenuItem textDecorationLine={"none"}>New in</MenuItem></NavLink>
+                  <MenuItem>View All</MenuItem>
+                  <MenuItem>tshirt</MenuItem>
+                  <MenuItem>kurta</MenuItem>
+                  <MenuItem>shirt</MenuItem>
+                  <MenuItem>short</MenuItem>
+                  <MenuItem>Footwear</MenuItem>
+                </MenuList>
+              </Collapse>
+            </>
+          )}
+        </Menu>
+
+        <Menu>
+                <NavLink to={'/maintainance'}>
+                  <MenuButton 
+                  as={Box} 
+                  cursor="pointer"
+                  px={2}
+                  transition='all 0.2s'           
+                  fontWeight={'bold'}
+                  _hover={{ borderBottomColor: '#FF0080' }}
+                  _expanded={{ color:'#FF0080' }}
+                  _focus={{ boxShadow: 'outline' }} 
+                  >
+                    <Text fontSize={18}>Women <ChevronDownIcon /></Text>
+                  </MenuButton>
+                </NavLink>
+              </Menu>
+
+              <Menu>
+                <NavLink to={'/maintainance'}>
+                <MenuButton as={Box} 
+                  cursor="pointer"
+                  px={2}
+                  transition='all 0.2s'
+                  fontWeight={'bold'}
+                  _hover={{ borderBottomColor: '#FF0080' }}
+                  _expanded={{ color:'#FF0080' }}
+                  _focus={{ boxShadow: 'outline' }} >
+                  <Text fontSize={18}>Kids <ChevronDownIcon /></Text>
+                </MenuButton>
+                </NavLink>
+              </Menu>
+
+              <Menu>
+                <NavLink to={'/maintainance'}>
+                <MenuButton as={Box} 
+                  cursor="pointer"
+                  px={2}
+                  transition='all 0.2s'
+                  _hover={{ borderBottomColor: '#f51e89' }}
+                  _expanded={{ color:'rgb(255, 0, 128)' }}
+                  _focus={{ boxShadow: 'outline' }} fontWeight={'bold'}>
+                  <Text fontSize={18}>Collection <ChevronDownIcon /></Text>
+                </MenuButton>
+                </NavLink>
+              </Menu>
+        {/* Other menu sections (Women, Kids, Collection) */}
       </Stack>
+      {/* Profile and Logout buttons */}
+    </DrawerBody>
+  
+            {/* Profile and Logout buttons */}         
+          
+          <DrawerFooter>
+          <Stack mr={170} mb={20}>
+              
+              <Button
+                leftIcon={<FaUser />}
+                variant="ghost"
+                onClick={() => navigate('/tablogin')}
+                _hover={{ borderBottomColor: 'gray.400', color: '#FF0080' }}
+                _expanded={{ color: '#ff0080ea' }}
+              >
+                <Text fontSize={18} as={'b'}>Profile</Text>
+              </Button>
+              <Button
+                leftIcon={<FaSignOutAlt />}
+                variant="ghost"
+                onClick={handleLogout}
+                ml={2}
+                _hover={{ borderBottomColor: 'gray.400', color: '#FF0080' }}
+                _expanded={{ color: '#ff0080ea' }}
+              >
+                <Text fontSize={18} as={'b'}>Logout</Text>
+              </Button>
+              <Box mr={30}><ThemeToggle/></Box>
+            </Stack>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </Flex>
   );
 };
 
 export default NavBar;
+
+
+
+
+
