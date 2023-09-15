@@ -33,7 +33,21 @@ const SingleProduct = () => {
   const {msg,isLoad} = useSelector(store=>store.cartReducer)
   const [count,setCount] = useState(1)
   const [isToastMsg,setIsToastMsg] = useState(false)
-  
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isTablet, setIsTablet] = useState(window.innerWidth >= 768 && window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      setIsMobile(windowWidth < 768);
+      setIsTablet(windowWidth >= 768 && windowWidth < 1024);
+    };
+    window.addEventListener('resize', handleResize);
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array ensures the effect runs only once
   
   const handleFetch = async() =>{
     try {
@@ -74,13 +88,115 @@ const SingleProduct = () => {
  
   return (
     <>
-      <Box  w={'70%'} m={'auto'}>
+      {(isMobile && !isTablet) && (
+        <>
+        <Box   m={'auto'} w={"100%"}>
+        <Box mt={'10%'} boxShadow={'md'} mb={'5%'} >
+            {/* <Flex justifyContent={'space-between'} gap={10} border={'1px'} borderColor={'red'}> */}
+              <Box >
+                <Caroselimage arr={a}/>
+              </Box>
+              <Box  w={'100%'} mr={10} mt={5}>
+                <Box m={5}>
+                  <Heading as={'h1'}>{product.title}</Heading>
+                </Box>
+                <Box m={5}>
+                  <Text as={'b'}>Brand : {product.brand}</Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize='2xl' as={'b'}>{product.off_price} /-
+                  <Badge ml='1' mb={'10'} colorScheme='green'>
+                    {product.discount}
+                  </Badge>
+                  </Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize={'xl'} textDecor='line-through' as={'i'}>
+                    {product.price} /- Rs.
+                  </Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize={'xl'}>{product.description}</Text>
+                </Box>
+                <Box m={5}>
+                  <Button mr={5} onClick={()=>setCount(count+1)} isDisabled={product.count?count === product.count:count===10}>+</Button>
+                  {count}
+                  <Button ml={5} onClick={()=>setCount(count-1)} isDisabled={count === 1} >-</Button>
+                </Box>
+                <Box m={5}>
+                  <RatingStars rating={product.rating} />
+                </Box>  
+                
+                <Button m={5} onClick={()=>handleCart(product._id)}>Add to Cart</Button>
+              </Box>
+            {/* </Flex> */}
+            
+        </Box>
+        
+      </Box>
+      <Footer/>
+        </>
+      )}
+
+      {(!isMobile && isTablet) && (
+        <>
+        <Box  w={'100%'} m={'auto'}>
         <Box mt={'10%'} boxShadow={'md'} mb={'5%'}>
-            <Flex justifyContent={'space-between'} gap={10} >
-              <Box w={'50%'} ml={10} mt={10}>
+            {/* <Flex justifyContent={'space-between'} gap={10} > */}
+              <Box  >
                 <Caroselimage arr={a} />
               </Box>
-              <Box  w={'60%'} mr={10} mt={5}>
+              <Box  w={'90%'} mr={10} mt={5}>
+                <Box m={5}>
+                  <Heading as={'h1'}>{product.title}</Heading>
+                </Box>
+                <Box m={5}>
+                  <Text as={'b'}>Brand : {product.brand}</Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize='2xl' as={'b'}>{product.off_price} /-
+                  <Badge ml='1' mb={'10'} colorScheme='green'>
+                    {product.discount}
+                  </Badge>
+                  </Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize={'xl'} textDecor='line-through' as={'i'}>
+                    {product.price} /- Rs.
+                  </Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize={'xl'}>{product.description}</Text>
+                </Box>
+                <Box m={5}>
+                  <Button mr={5} onClick={()=>setCount(count+1)} isDisabled={product.count?count === product.count:count===10}>+</Button>
+                  {count}
+                  <Button ml={5} onClick={()=>setCount(count-1)} isDisabled={count === 1} >-</Button>
+                </Box>
+                <Box m={5}>
+                  <RatingStars rating={product.rating} />
+                </Box>  
+                <Button m={5} onClick={()=>handleCart(product._id)}>Add to Cart</Button>
+              </Box>
+            {/* </Flex> */}
+            
+        </Box>
+        
+      </Box>
+      <Footer/>
+        </>
+              
+      )}
+
+      {(!isMobile && !isTablet) && (
+        <>
+        <Box  w={'80%'} m={'auto'}>
+        <Box mt={'10%'} boxShadow={'md'} mb={'5%'}>
+            <Flex justifyContent={'space-between'} gap={10} >
+              <Box w={'lg'} ml={10} mt={10}>
+                <Caroselimage arr={a} />
+              </Box>
+              <Box  w={'50%'} mr={10} mt={5}>
                 <Box m={5}>
                   <Heading as={'h1'}>{product.title}</Heading>
                 </Box>
@@ -118,6 +234,9 @@ const SingleProduct = () => {
         
       </Box>
       <Footer/>
+        </>
+      )}
+      
     </>
   )
 }

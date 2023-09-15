@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import Toast from './component/cart/Toast';
 import YourComponent from './component/cart/YourComponent';
 import TextToSpeech from './component/LottieAnimation/TextToSpeech';
+import { Footer } from './component/Footer/Footer';
 
 
 
@@ -24,6 +25,7 @@ const App = () => {
         <NavBar/>
         <TextToSpeech/>
         <MainRoute/>
+        <Footer/>
         <Toast/>
       </ColorModeProvider>
   

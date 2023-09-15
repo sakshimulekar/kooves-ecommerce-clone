@@ -9,7 +9,7 @@ const Caroselimage = ({ arr }) => {
     }
   
     return (
-      <Carousel interval={1000} width={'25rem'} border={'1px solid'} >
+      <Carousel interval={1000}  border={'1px solid'} >
         {arr.map((e, i) => (
           <div key={i}>
             <Image src={e} alt='img' />

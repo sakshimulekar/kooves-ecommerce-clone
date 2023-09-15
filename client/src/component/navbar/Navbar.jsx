@@ -45,6 +45,22 @@ const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isTablet, setIsTablet] = useState(window.innerWidth >= 768 && window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      setIsMobile(windowWidth < 768);
+      setIsTablet(windowWidth >= 768 && windowWidth < 1024);
+    };
+    window.addEventListener('resize', handleResize);
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array ensures the effect runs only once
+
 
   const handleLogout = () => {
     dispatch(logout)
@@ -75,8 +91,7 @@ const NavBar = () => {
     setSearchResults(products)
     console.log(searchResults,'65')
   }
-  const isMobile = window.innerWidth < 768; // Define a breakpoint for mobile
-  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; // Define a breakpoint for tablet
+  // Define a breakpoint for mobile
   console.log(products,'68')
 
   return (

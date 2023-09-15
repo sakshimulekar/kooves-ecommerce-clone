@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Flex, Image,Box } from '@chakra-ui/react';
 import koov from "../../Assest/koov_brand_logo.avif";
 import arkiv from "../../Assest/arkiv_logo.avif";
@@ -15,8 +15,22 @@ import publi from "../../Assest/publi_logo.avif";
 let images = [koov, arkiv, kangol, keen, koovs, essential, conture, coma, brand, Ball, publi];
 
 const Logos = () => {
-  const isMobile = window.innerWidth < 768; // Define a breakpoint for mobile
-  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; // Define a breakpoint for tablet
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isTablet, setIsTablet] = useState(window.innerWidth >= 768 && window.innerWidth < 1024);
+
+  useEffect(() => {
+      const handleResize = () => {
+        const windowWidth = window.innerWidth;
+        setIsMobile(windowWidth < 768);
+        setIsTablet(windowWidth >= 768 && windowWidth < 1024);
+      };
+      window.addEventListener('resize', handleResize);
+      // Cleanup the event listener when the component unmounts
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+  }, []); // Empty dependency array ensures the effect runs only once
+
   return (
     <Box >
       {(isMobile && !isTablet) && (

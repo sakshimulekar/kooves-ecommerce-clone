@@ -18,15 +18,24 @@ const ModalComponent = ({ closeModal, product }) => {
   const [count,setCount] = useState(1)
   const [isToastMsg,setIsToastMsg] = useState(false)
   let [message,setMessage] = useState(msg)
-  //const [messageRef,setMessageRef] = useState(msg)
-  // You can now use the 'product' prop to access the relevant product details
-  //console.log(msg,'18 modalcomponent')
-  let ans = product.images
-  //console.log(ans)
-  let a = Object.values(ans)
-  //console.log(a)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isTablet, setIsTablet] = useState(window.innerWidth >= 768 && window.innerWidth < 1024);
 
-  console.log(product)
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      setIsMobile(windowWidth < 768);
+      setIsTablet(windowWidth >= 768 && windowWidth < 1024);
+    };
+    window.addEventListener('resize', handleResize);
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array ensures the effect runs only once
+  let ans = product.images
+  let a = Object.values(ans)
+  // console.log(product)
 
   const handleCart=async(id)=>{
     const quantity = count
@@ -45,18 +54,128 @@ const ModalComponent = ({ closeModal, product }) => {
 
 
   return (
-    <Modal isOpen={true} onClose={closeModal} size={'5xl'} isCentered='true' >
+    <>
+
+    {(!isMobile && isTablet) && (
+      <Modal isOpen={true} onClose={closeModal} size={'xl'} isCentered='true' >
       <ModalOverlay />
       <ModalContent mt={'5rem'}>
         
         <ModalCloseButton rounded='true'/>
         <ModalBody>
           <Box >
-            <Flex justifyContent={'space-between'} gap={10} >
+
+            {/* <Flex justifyContent={'space-between'} gap={10} > */}
               <Box >
                 <Caroselimage arr={a}/>
               </Box>
-              <Box  w={'90'} >
+              <Box  >
+                <Box m={5}>
+                  <Heading as={'h1'}>{product.title}</Heading>
+                </Box>
+                <Box m={5}>
+                  <Text as={'b'}>Brand : {product.brand}</Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize='2xl' as={'b'}>{product.off_price} /-
+                  <Badge ml='1' mb={'10'} colorScheme='green'>
+                    {product.discount}
+                  </Badge>
+                  </Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize={'xl'} textDecor='line-through' as={'i'}>
+                    {product.price} /- Rs.
+                  </Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize={'xl'}>{product.description}</Text>
+                </Box>
+                <Box ml={2}>
+                  <Button onClick={()=>setCount(count+1)} isDisabled={product.count?count === product.count:count===10}>+</Button>
+                  {count}
+                  <Button onClick={()=>setCount(count-1)} isDisabled={count === 1} >-</Button>
+                </Box>
+                <Box m={5}>
+                  <RatingStars rating={product.rating} />
+                </Box>  
+                <Button m={5} onClick={()=>handleCart(product._id)}>Add to Cart</Button>
+              </Box>
+            {/* </Flex> */}
+            {/* Add other product details here */}
+          </Box>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+    )}
+
+    {(isMobile && !isTablet) && (
+      <Modal isOpen={true} onClose={closeModal} size={'md'} isCentered='true' >
+      <ModalOverlay />
+      <ModalContent mt={'5rem'}>
+        
+        <ModalCloseButton rounded='true'/>
+        <ModalBody>
+          <Box >
+
+            {/* <Flex justifyContent={'space-between'} gap={10} > */}
+              <Box >
+                <Caroselimage arr={a}/>
+              </Box>
+              <Box >
+                <Box m={5}>
+                  <Heading as={'h1'}>{product.title}</Heading>
+                </Box>
+                <Box m={5}>
+                  <Text as={'b'}>Brand : {product.brand}</Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize='2xl' as={'b'}>{product.off_price} /-
+                  <Badge ml='1' mb={'10'} colorScheme='green'>
+                    {product.discount}
+                  </Badge>
+                  </Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize={'xl'} textDecor='line-through' as={'i'}>
+                    {product.price} /- Rs.
+                  </Text>
+                </Box>
+                <Box m={5}>
+                  <Text fontSize={'xl'}>{product.description}</Text>
+                </Box>
+                <Box ml={2}>
+                  <Button onClick={()=>setCount(count+1)} isDisabled={product.count?count === product.count:count===10}>+</Button>
+                  {count}
+                  <Button onClick={()=>setCount(count-1)} isDisabled={count === 1} >-</Button>
+                </Box>
+                <Box m={5}>
+                  <RatingStars rating={product.rating} />
+                </Box>  
+                <Button m={5} onClick={()=>handleCart(product._id)}>Add to Cart</Button>
+              </Box>
+            {/* </Flex> */}
+            {/* Add other product details here */}
+          </Box>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+    )}
+
+    {(!isMobile && !isTablet) && (
+      <Modal isOpen={true} onClose={closeModal} size={'4xl'} isCentered='true' >
+      <ModalOverlay />
+      <ModalContent mt={'5rem'}>
+        
+        <ModalCloseButton rounded='true'/>
+        <ModalBody>
+          <Box >
+
+            <Flex justifyContent={'space-between'} gap={10} >
+              <Box w={'50%'}>
+                <Caroselimage arr={a}/>
+              </Box>
+              <Box  w={"50%"}>
                 <Box m={5}>
                   <Heading as={'h1'}>{product.title}</Heading>
                 </Box>
@@ -94,6 +213,9 @@ const ModalComponent = ({ closeModal, product }) => {
         </ModalBody>
       </ModalContent>
     </Modal>
+    )}
+    
+    </>
   );
 };
 

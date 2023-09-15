@@ -25,6 +25,8 @@ import { Footer } from '../Footer/Footer'
 const videos=[carosel1,carosel2,carosel3,carosel4,carosel5,carosel6,carosel7]
 const bankstrip=[bankstrip1,bankstip2,bankstrip3]
 const caroselArr=[carosel9,carosel10,carosel11,carosel12,carosel13]
+
+
 const Home = () => {
   
   return (
@@ -54,7 +56,7 @@ const Home = () => {
         </Box>
       
         
-        <Footer/>
+        
 
       </Box>
   )
