@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import { AiTwotoneTags } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import ModalAddress from '../checkout/ModalAddress';
+import Coupen from './Coupen';
 
 
-const TotalCartCalculate = ({total,len}) => {
+const TotalCartCalculate = ({cart,total,len}) => {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -34,28 +35,8 @@ const TotalCartCalculate = ({total,len}) => {
         </Flex>
         <Button>APPLY</Button>
       </Flex>
-      <Text >PRICE DETAIL ({len} Item)</Text>
-      <Flex justifyContent={'space-between'} alignItems={'center'} width={'80%'}>
-        <Box>Subtotal MRP : </Box>
-        <Box>₹ {total}/-</Box>
-      </Flex>
-      <Flex justifyContent={'space-between'} alignItems={'center'} width={'75%'}>
-        <Box>CONVINENCE FEE : </Box>
-        <Box color={'green'} as='p'>FREE</Box>
-      </Flex>
-      <Flex justifyContent={'space-between'} alignItems={'center'} width={'80%'} borderBottom={'1px'}>
-        <Box>Total Amount : </Box>
-        <Box>₹ {total}/-</Box>
-      </Flex>
-      <Flex justifyContent={'space-between'} alignItems={'center'} width={'80%'}>
-        <Box as='b'>Total Amount : </Box>
-        <Box as='b'>₹ {total}/-</Box>
-      </Flex>
+      <Coupen len={len} cart={cart} total={total}/>
       <Center w={'80%'} m={10}>
-      {/* <Button as={'b'} 
-        color={'white'} 
-        backgroundColor={'#FF0080'} 
-        onClick={()=>navigate("/address")}>PLACE ORDER</Button> */}
         <Button backgroundColor={'#FF0080'}  onClick={()=>handleClick()} as={'b'} 
         color={'white'}>
             PLACE ORDER

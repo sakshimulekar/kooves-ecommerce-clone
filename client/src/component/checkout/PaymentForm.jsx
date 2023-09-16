@@ -170,7 +170,11 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import bankLogo from '../../Assest/checkout_bank.png'
-
+import TotalCartCalculate from '../cart/TotalCartCalculate';
+import Coupen from '../cart/Coupen';
+import PaymentAnimation from '../LottieAnimation/PaymentAnimation';
+import {FcGoogle} from 'react-icons/fc'
+import { FaApplePay } from "react-icons/fa6";
 const PaymentForm = () => {
   const navigation = useNavigate();
   const toast = useToast({position:'top'})
@@ -223,36 +227,47 @@ const PaymentForm = () => {
   };
 
   return (
-    <Center>
-    <Box p={4} borderWidth={1} borderRadius="md" mt={'10%'} w={'35%'}>
-      <Heading as="h2" size="lg" mb={4} textAlign="center">
-        Payment Details
-      </Heading>
-      <form onSubmit={handleSubmit}>
-        <Stack spacing={4}>
-          <Input placeholder={'Cardholder name'}/>
-          <Flex justifyContent={'space-between'}> 
-            <Text fontWeight={'bold'}>Card Details</Text>
-            <Image src={bankLogo} w={75} mr={10}/>
-          </Flex>
+    <Box mt={'5%'} >
+      <Flex>
+        <Box>
+          <PaymentAnimation/>
+        </Box>
+        <Box p={4} m={10} borderWidth={1} borderRadius="md"  w={'35%'}>
+          <Heading as="h2" size="lg" mb={4} textAlign="center" mt={4}>
+            Payment Details
+          </Heading>
+         
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={4}>
+              <Flex alignItems={'center'} justifyContent={'center'} borderWidth={1} p={2} borderRadius={'md'}>{<FcGoogle/>}Pay</Flex>
+              <Box fontSize={40} m={'auto'} borderWidth={1} textAlign={'center'}  borderRadius={'md'} pl={'46%'} pr={'46%'}>{<FaApplePay/>}</Box>
+              <Text textAlign={'center'}>Or</Text>
+              <Input placeholder={'Cardholder name'}/>
+              <Flex justifyContent={'space-between'}> 
+                <Text fontWeight={'bold'} ml={50} pl={5}>Card Details</Text>
+                <Image src={bankLogo} w={75} mr={10}/>
+              </Flex>
+            
+              <Box borderWidth="1px" p={4}>  
+                <CardElement />
+              </Box>
+              <Text color={'red'}>please use 4242 4242 4242 4242 as card no. for stripe testmode</Text>
+              <Button
+                type="submit"
+                colorScheme="blue"
+                size="lg"
+                isLoading={!stripe}
+                loadingText="Processing"
+              >
+                Pay
+              </Button>
+            </Stack>
+          </form>
+        </Box>
+
         
-          <Box borderWidth="1px" p={4}>  
-            <CardElement />
-          </Box>
-          <Text color={'red'}>please use 4242 4242 4242 4242 as card no. for stripe testmode</Text>
-          <Button
-            type="submit"
-            colorScheme="blue"
-            size="lg"
-            isLoading={!stripe}
-            loadingText="Processing"
-          >
-            Pay
-          </Button>
-        </Stack>
-      </form>
+    </Flex>
     </Box>
-    </Center>
   );
 };
 

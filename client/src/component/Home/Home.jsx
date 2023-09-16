@@ -30,7 +30,7 @@ const caroselArr=[carosel9,carosel10,carosel11,carosel12,carosel13]
 const Home = () => {
   
   return (
-    <Box mt={20} >
+    <Box mt={12} >
         {/* this imagecarsosel we use for single product page */}
         <ImageCarousel videos={videos}/>
         <ImageCarousel videos={bankstrip}/>

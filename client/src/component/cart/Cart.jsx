@@ -8,10 +8,6 @@ import LoadingCart from '../LottieAnimation/LoadingCart';
 import EmptyCart from '../LottieAnimation/EmptyCartList';
 
 
-
-
-
-
 const Cart = () => {
   
   const navigate = useNavigate();
@@ -154,7 +150,7 @@ const Cart = () => {
     
       {/* <Divider orientation='vertical' /> */}
       
-      <GridItem><TotalCartCalculate len={cart.length} total={calculateTotal()}/></GridItem>
+      <GridItem><TotalCartCalculate cart={cart} len={cart.length} total={calculateTotal()}/></GridItem>
       </Grid>)}
     </Box>
   );
