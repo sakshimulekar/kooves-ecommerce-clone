@@ -50,7 +50,7 @@ export const login = (obj) => (dispatch) => {
       
       //document.cookie = `jsonCookie=${JSON.stringify(user)}`;
 
-      dispatch(loginSuccessWithToken(userId,token,msg));
+      dispatch(loginSuccessWithToken(userId,token,msg,user));
     })
     .catch((err) => {
       
@@ -84,7 +84,7 @@ export const googlelogin = () => () => {
   return
 };
 
-export const googleLoginSuccess = (userData, token) => (dispatch) => {
+export const googleLoginSuccess = (userData,user, token) => (dispatch) => {
   console.log(token)
   dispatch(loginSuccessWithToken(token)); // Set the token in Redux
   dispatch({
@@ -92,13 +92,14 @@ export const googleLoginSuccess = (userData, token) => (dispatch) => {
     payload: {
       userData,
       token,
+      user
     },
   });
   return
 };
 
-export const loginSuccessWithToken = (userData,token,msg) => (dispatch) => {
+export const loginSuccessWithToken = (userData,token,msg,user) => (dispatch) => {
   // You can add logic here to validate the token on the server-side if needed
   console.log(userData,'135')
-   dispatch({ type: LOGIN_SUCCESS, payload: {userData,token,msg} });
+   dispatch({ type: LOGIN_SUCCESS, payload: {userData,token,msg,user} });
 };

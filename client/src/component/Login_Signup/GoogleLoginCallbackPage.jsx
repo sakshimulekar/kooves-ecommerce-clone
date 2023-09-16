@@ -21,19 +21,22 @@ const GoogleLoginCallbackPage = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const tokenfromurl=searchParams.get('token')
     console.log(tokenfromurl,'16')
-    const userData = {
-      firstName: searchParams.get('firstName'),
-      picture: searchParams.get('picture'),
-      id:searchParams.get('id')
-    };
+    const userData = 
+    //{
+      //firstName: searchParams.get('firstName'),
+      searchParams.get('picture')
+      //id:searchParams.get('id')
+    //};
     console.log(userData)
+    const user = searchParams.get('firstName')
+    console.log(user,'31 google login page')
     localStorage.setItem('token',JSON.stringify(tokenfromurl))
-    localStorage.setItem('user',JSON.stringify(userData))
-    
-    dispatch(googleLoginSuccess(userData, tokenfromurl))
+    localStorage.setItem('user',JSON.stringify(user))
+    localStorage.setItem('picture',JSON.stringify(userData))
+    dispatch(googleLoginSuccess(userData,user, tokenfromurl))
     toast('🥳 login successfully!',{style:{fontWeight:'bold',fontSize:'20px',color:"black"}})
     
-    console.log(location.state,'31')
+    console.log(location.state,'38')
     const { from } = location.state || { from: { pathname: '/' } };
     navigate(from);
 

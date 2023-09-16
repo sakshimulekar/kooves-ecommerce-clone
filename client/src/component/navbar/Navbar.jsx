@@ -31,14 +31,18 @@ import logo from "../../Assest/StyleHub1.png";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/authReducer/action';
 import Cookies from 'js-cookie'
-import { handleSearch } from '../../redux/productReducer/action';
+import { handleMenu, handleSearch, menProducts } from '../../redux/productReducer/action';
+import { FcLike } from "react-icons/fc";
+import {FaPowerOff} from 'react-icons/fa'
 //import ProductContainer from '../product/ProductContainer';
 
 
 const NavBar = () => {
-
+  const user =  Cookies.get('user') || JSON.parse(localStorage.getItem('user'))|| ""
+  const picture = JSON.parse(localStorage.getItem('picture'))||""
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  //const {firstName,picture} = useSelector(store=>store.authReducer.user)
   const {products} = useSelector(store=>store.productReducer)
   const bgColor = useColorModeValue('white', 'gray.700');
   const textColor = useColorModeValue('black', 'white');
@@ -61,7 +65,13 @@ const NavBar = () => {
     };
   }, []); // Empty dependency array ensures the effect runs only once
 
-
+  const handleMenuButton = (val) =>{
+       console.log(val,'66')
+      
+       dispatch(handleMenu()).then(()=>{
+        navigate(`/selected/${val}`)
+      })
+  }
   const handleLogout = () => {
     dispatch(logout)
     localStorage.clear();
@@ -74,26 +84,22 @@ const NavBar = () => {
     setSearchQuery(e.target.value)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(handleSearch(searchQuery)).then(()=>{
-        
-        navigate('/searchresult')
-        //setSearchQuery("")
-      })
+      if (searchQuery) { // Check if there's a search query before dispatching
+        dispatch(handleSearch(searchQuery)).then(() => {
+          navigate('/searchresult');
+          setSearchQuery("");
+        });
+      }
     }, 2000);
-    return ()=>{
-      clearTimeout(timer)
-    }
-  },[searchQuery,dispatch])
-
-  const handleSearchResuts = () => {
-    setSearchResults(products)
-    console.log(searchResults,'65')
-  }
-  // Define a breakpoint for mobile
-  console.log(products,'68')
-
+  
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery, dispatch]);
+  console.log(user,picture,'100')
+ 
   return (
     <Flex
       as="nav"
@@ -138,13 +144,12 @@ const NavBar = () => {
                 </NavLink>
                 
                 <MenuList borderTopColor={'#FF0080'} borderTopWidth={'thick'} my={5} pl={3} pr={3}>
-                  <NavLink><MenuItem textDecorationLine={"none"}>New in</MenuItem></NavLink>
-                  <MenuItem>View All</MenuItem>
-                  <MenuItem>tshirt</MenuItem>
-                  <MenuItem>kurta</MenuItem>
-                  <MenuItem>shirt</MenuItem>
-                  <MenuItem>short</MenuItem>
-                  <MenuItem>Footwear</MenuItem>
+                  <MenuItem onClick={()=>handleMenuButton("view")}>View All</MenuItem>
+                  <MenuItem onClick={()=>handleMenuButton("tshirt")}>tshirt</MenuItem>
+                  <MenuItem onClick={()=>handleMenuButton("kurta")}>kurta</MenuItem>
+                  <MenuItem onClick={()=>handleMenuButton("shirt")}>shirt</MenuItem>
+                  <MenuItem onClick={()=>handleMenuButton("short")}>short</MenuItem>
+                  <MenuItem onClick={()=>handleMenuButton("shoes")}>Footwear</MenuItem>
                 </MenuList>
               </Menu>
 
@@ -284,19 +289,20 @@ const NavBar = () => {
           <Box>
           <IconButton
             aria-label="Login"
-            icon={<FaUser />}
+            icon={picture?(<img style={{width:'25px',borderRadius:'15px'}} src={picture}/>):(<FaUser />)}
             variant="ghost"
             colorScheme="gray"
             placeholder='profile'
             onClick={()=>navigate('/tablogin')}
           />
-          <Heading fontSize={10} pl={1}>Profile</Heading>
+          <Heading fontSize={10} pl={1}>{user?user:'profile'}</Heading>
           </Box>
   
           <Box>
           <IconButton
             aria-label="Wishlist"
-            icon={<FaStar />}
+            icon={<FcLike />}
+            fontSize={24}
             variant="ghost"
             colorScheme="gray"
             onClick={()=>navigate('/wishlist')}
@@ -315,8 +321,9 @@ const NavBar = () => {
           <Heading fontSize={10} ml={3}>Bag</Heading>
           </Link>
           </Box>
+         
+          <button onClick={handleLogout}><FaPowerOff/></button>
           <ThemeToggle/>
-          <button onClick={handleLogout}>Logout</button>
         </Stack>
       )}
       
@@ -407,6 +414,18 @@ const NavBar = () => {
               </Menu>
         {/* Other menu sections (Women, Kids, Collection) */}
       </Stack>
+      <Flex alignItems={'center'} px={1}>
+          <Heading fontSize={18} ml={1}>Wishlist</Heading>
+          <IconButton
+            aria-label="Wishlist"
+            icon={<FcLike />}
+            fontSize={20}
+            variant="ghost"
+            colorScheme="gray"
+            onClick={()=>navigate('/wishlist')}
+          />
+          
+          </Flex>
       {/* Profile and Logout buttons */}
     </DrawerBody>
   
@@ -416,23 +435,23 @@ const NavBar = () => {
           <Stack mr={170} mb={20}>
               
               <Button
-                leftIcon={<FaUser />}
+                leftIcon={picture?(<img style={{width:'20px',borderRadius:'10px'}} src={picture}/>):(<FaUser />)}
                 variant="ghost"
                 onClick={() => navigate('/tablogin')}
                 _hover={{ borderBottomColor: 'gray.400', color: '#FF0080' }}
                 _expanded={{ color: '#ff0080ea' }}
               >
-                <Text fontSize={18} as={'b'}>Profile</Text>
+                <Text fontSize={18} as={'b'}>{user?user:'profile'}</Text>
               </Button>
               <Button
                 leftIcon={<FaSignOutAlt />}
                 variant="ghost"
                 onClick={handleLogout}
-                ml={2}
+                ml={3}
                 _hover={{ borderBottomColor: 'gray.400', color: '#FF0080' }}
                 _expanded={{ color: '#ff0080ea' }}
               >
-                <Text fontSize={18} as={'b'}>Logout</Text>
+                <Text fontSize={18} as={'b'}>Log Out</Text>
               </Button>
               <Box mr={30}><ThemeToggle/></Box>
             </Stack>

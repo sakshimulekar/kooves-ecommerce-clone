@@ -1,9 +1,9 @@
 import React from 'react'
 import SingleHomeCard from './SingleHomeCard'
-import { Box, Button, Center, Heading } from '@chakra-ui/react'
+import { Box, Button, Center, Heading ,Text} from '@chakra-ui/react'
 import Logos from './Logos'
 import ImageCarousel from './ImageCarousel'
-import { homewomendata } from '../../utils/Homewomendata'
+import { homemendata, homewomendata } from '../../utils/Homewomendata'
 import Products from '../../pages/Products'
 import carosel1 from "../../Assest/carosel1.gif"
 import carosel2 from "../../Assest/carosel2.webp"
@@ -35,7 +35,7 @@ const Home = () => {
         <ImageCarousel videos={videos}/>
         <ImageCarousel videos={bankstrip}/>
         <Box bgColor={'gold'} p={2} mt={2}>
-        <center as='b' >Shop Women's</center>
+        <center as='b' ><Text as={'b'} fontSize={30}>Shop Men's Clothing</Text></center>
         </Box>
        
         <Box  >
@@ -47,7 +47,7 @@ const Home = () => {
         <Center as='b' p={1}><Button backgroundColor={'transparent'}>View More</Button></Center>
         </Box>
         <Box>
-        <SingleHomeCard data={homewomendata}/>
+        <SingleHomeCard data={homemendata}/>
         </Box>
         <img src={banner1} alt='banner' width={'100%'}/>
         <Box m={5}>

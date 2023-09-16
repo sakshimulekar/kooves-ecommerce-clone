@@ -22,15 +22,16 @@ import { ArrowForwardIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 
 const SingleHomeCard = ({data}) => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const bgColor = useColorModeValue('gray.100', 'gray.700');
   const textColor = useColorModeValue('black', 'white');
 
-  const handleRedirect = (link) => {
+  const handleRedirect = (id) => {
     // Replace '/another-page' with the actual path you want to redirect to
-    navigation(link)
+    //console.log(id,'31')
+    navigate(`/Product/${id}`)
   };
-  //console.log(data)
+  //console.log(data.id)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isTablet, setIsTablet] = useState(window.innerWidth >= 768 && window.innerWidth < 1024);
 
@@ -142,7 +143,7 @@ const SingleHomeCard = ({data}) => {
               isRound={true}
               color={textColor}
               _hover={{ bgColor: "gray.500" }}
-              onClick={()=>handleRedirect(e.link)}
+              onClick={()=>handleRedirect(e.id)}
               aria-label='Done'
               fontSize='20px'
               icon={<ArrowForwardIcon />}
@@ -152,6 +153,7 @@ const SingleHomeCard = ({data}) => {
             src={e.image}
             alt="Green double couch with wooden legs"
             borderRadius="lg"
+            w={'lg'}
           />
         </CardBody>
       </Card>

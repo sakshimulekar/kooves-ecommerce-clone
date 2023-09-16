@@ -172,7 +172,7 @@ const ModalComponent = ({ closeModal, product }) => {
           <Box >
 
             <Flex justifyContent={'space-between'} gap={10} >
-              <Box w={'50%'}>
+              <Box w={'50%'} mt={5}>
                 <Caroselimage arr={a}/>
               </Box>
               <Box  w={"50%"}>

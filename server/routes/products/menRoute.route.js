@@ -69,6 +69,17 @@ menRoute.get("/:page", async (req, res) => {
   }
 });
 
+menRoute.get('/',async(req,res)=>{
+  try {
+    const selectedProduct = await FootwearModel.find()
+    console.log(selectedProduct,'79')
+    res.status(200).json({msg:'this is the selected product',selectedProduct})
+  } catch (error) {
+    console.log(error.message,'80')
+    res.status(400).json({msg:error.message})
+  }
+})
+
 menRoute.get('/api/search', async (req, res) => {
   try {
     const { query } = req.query;

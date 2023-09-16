@@ -4,3 +4,6 @@ export const PRODUCT_FAIL="PRODUCT_FAIL"
 export const SEARCH_REQ = 'SEARCH_REQ'
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS'
 export const SEARCH_FAILURE = 'SEARCH_FAILURE'
+export const CATEG_REQ='CATEG_REQ'
+export const CATEG_SUCC='CATEG_SUCC'
+export const CATEG_FAIL='CATEG_FAIL'

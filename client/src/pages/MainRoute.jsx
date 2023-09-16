@@ -19,6 +19,7 @@ import Successpayment from '../component/checkout/Successpayment'
 import TabLogin from '../component/Login_Signup/TabLogin'
 import SearchResult from '../component/product/SearchResult'
 import SingleProduct from '../component/product/SingleProduct'
+import DynamicRes from '../component/product/DynamicRes'
 
 
 const MainRoute = () => {
@@ -30,6 +31,7 @@ const MainRoute = () => {
         <Route path='/register' element={<SignUp/>}/>
         <Route path='/product' element={<Products/>}/>
         <Route path='/Product/:id' element={<SingleProduct/>}/>
+        <Route path='/selected/:val' element={<DynamicRes/>}/>
         <Route path='/wishlist' element={<PrivateRoute><Wishlist/></PrivateRoute>}/>
         <Route path='/success' element={<GoogleLoginCallbackPage/>}/>
         <Route path='/maintainance' element={<UnderConstruction/>}/>
@@ -39,7 +41,7 @@ const MainRoute = () => {
         <Route path='/cart' element={<PrivateRoute>
           <Cart/>
         </PrivateRoute>}/>
-        <Route path='/address' element={<AddressForm/>}/>
+        {/* <Route path='/address' element={<AddressForm/>}/> */}
         {/* <Route path='/checkout-success' element={<Checkout/>}/> */}
         <Route path='/checkout' element={<PaymentForm/>}/>
         <Route path='/deleteCartItem/:id' element={<DeleteCartItem/>}/>

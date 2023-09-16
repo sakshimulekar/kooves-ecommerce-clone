@@ -17,6 +17,7 @@ const App = () => {
     let token = localStorage.getItem('userInfo')
     console.log(token)
   },[])
+  
   return (
     <ChakraProvider theme={theme}>
   

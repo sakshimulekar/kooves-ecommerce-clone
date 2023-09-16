@@ -12,7 +12,7 @@ const obj = {
 
 const Login = () => {
   const [state, setState] = useState(obj);
-  const {isAuth,message,isErr} = useSelector((store) => store.authReducer);
+  const {isAuth,message,isErr,user} = useSelector((store) => store.authReducer);
   const [isToastDisplayed, setIsToastDisplayed] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -73,35 +73,6 @@ const Login = () => {
     }
   }, [isAuth, isErr, isToastDisplayed, toast]);
   
-  // useEffect(() => {
-  //   console.log(isAuth,isErr)
-  //   messageRef.current = message;
-  //   console.log(messageRef)
-  //   if (isAuth && !isToastDisplayed) {
-  //     // Display different toasts based on the message content
-  //     //if (messageRef.current === 'login success') {
-  //       toast({
-  //         title: 'Login Successfull!',
-  //         description: 'You are Login.',
-  //         status: 'success',
-  //         duration: 5000,
-  //         isClosable: true,
-  //       });
-
-  //   if(isErr && !isToastDisplayed){
-  //     toast({
-  //       title: 'Login fail!',
-  //       description: 'You are Login.',
-  //       status: 'error',
-  //       duration: 5000,
-  //       isClosable: true,
-  //     });
-  //   }
-  //     //}
-      
-  //     setIsToastDisplayed(true);
-  //   }
-  // }, [isAuth, isToastDisplayed, toast]);
   return (
     <Stack spacing={4} maxW="md" m="auto" p={4}>
       {/* <Heading>Log In</Heading> */}

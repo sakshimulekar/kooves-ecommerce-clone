@@ -12,7 +12,7 @@ const TabLogin = () => {
   
     return (
     <Box  mt={'10%'}>
-      {(!isMobile || isTablet) && (
+      {(!isMobile && isTablet) && (
             <Box m={'auto'} w={'80%'}  pt={'30%'}>
             <Tabs 
             isFitted variant='enclosed' 
@@ -45,7 +45,7 @@ const TabLogin = () => {
         </Box>
       )}
 
-      {(isMobile || !isTablet) && (
+      {(isMobile && !isTablet) && (
             <Box m={'auto'} w={'80%'} pt={'50%'}>
             <Tabs 
             isFitted variant='enclosed' 
@@ -79,7 +79,7 @@ const TabLogin = () => {
       )}
 
       {(!isMobile && !isTablet) && (
-            <Box mt={'10%'}>
+            <Box mt={'10%'} mb={10}>
             <Tabs 
             isFitted variant='enclosed' 
             defaultIndex={0}  

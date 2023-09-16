@@ -1,10 +1,11 @@
-import { PRODUCT_FAIL, PRODUCT_REQ, PRODUCT_SUCCESS, SEARCH_FAILURE, SEARCH_REQ, SEARCH_SUCCESS } from "./actionType"
+import { CATEG_FAIL, CATEG_REQ, CATEG_SUCC, PRODUCT_FAIL, PRODUCT_REQ, PRODUCT_SUCCESS, SEARCH_FAILURE, SEARCH_REQ, SEARCH_SUCCESS } from "./actionType"
 
 const initial={
     isLoad:false,
     isErr:false,
     products:[],
-    searchResults : []
+    searchResults : [],
+    selected : []
 }
 
 export const reducer=(state=initial,{type,payload})=>{
@@ -20,6 +21,13 @@ export const reducer=(state=initial,{type,payload})=>{
         case SEARCH_SUCCESS:
             return {...state,searchResults:payload,isLoad:false}
         case SEARCH_FAILURE:
+            return {...state,isErr:true,isLoad:false}
+        case CATEG_REQ:
+            return {...state,isLoad:true}
+        case CATEG_SUCC:
+            
+            return {...state,selected:payload,isLoad:false}
+        case CATEG_FAIL:
             return {...state,isErr:true,isLoad:false}
         default :
         return state

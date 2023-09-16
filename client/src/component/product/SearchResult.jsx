@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import {ChevronRightIcon} from '@chakra-ui/icons'
 import ProductCard from './CardWithHover'
+import ProductPageCard from './ProductPageCard'
 
 const SearchResult = () => {
   const [result,setResult] = useState([])
@@ -25,14 +26,14 @@ const SearchResult = () => {
   return (
     <Box mt={'5%'} >
       <Box m={'auto'} w={'100%'}>
-      {/* <Breadcrumb fontWeight='bold' fontSize='lg' ml={10}>
+      <Breadcrumb fontWeight='bold' fontSize='lg' ml={10}>
         <BreadcrumbItem>
           <BreadcrumbLink href='/'>Home </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem>
           <BreadcrumbLink href='#'>Search by Product</BreadcrumbLink>
         </BreadcrumbItem>
-      </Breadcrumb> */}
+      </Breadcrumb>
 
       {isLoad && <><LoadingCart/></>}
       
@@ -42,11 +43,11 @@ const SearchResult = () => {
       }
       {!isLoad && searchResults?.length && searchResults?.map((e)=>{
         return (
-        <Grid templateColumns='repeat(4, 1fr)'  gap={10}  w={"80%"} margin={'auto'} pt={10} border={'1px'}>
+        // <Grid templateColumns='repeat(4, 1fr)'  gap={10}  w={"80%"} margin={'auto'} pt={10} border={'1px'}>
             <Box>
-            <ProductCard {...e}/>
+            <ProductPageCard data={searchResults}/>
             </Box>
-        </Grid>
+        //</Grid>
       )})}
       </Box>
     </Box>

@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { PRODUCT_FAIL, PRODUCT_REQ, PRODUCT_SUCCESS, SEARCH_FAILURE, SEARCH_REQ, SEARCH_SUCCESS } from "./actionType"
+import { CATEG_FAIL, CATEG_REQ, CATEG_SUCC, PRODUCT_FAIL, PRODUCT_REQ, PRODUCT_SUCCESS, SEARCH_FAILURE, SEARCH_REQ, SEARCH_SUCCESS } from "./actionType"
 import axios from "axios";
 
 export const menProducts=(obj,page)=>(dispatch)=>{
@@ -35,5 +35,21 @@ export const handleSearch =(searchQuery)=> async (dispach) => {
         console.log(error.message)
         dispach({type:SEARCH_FAILURE})
     }
-  };
+};
   
+
+export const handleMenu=()=>(dispatch)=>{
+    //console.log(obj,'42')
+    dispatch({type:CATEG_REQ})
+    return axios.get('http://localhost:8000/men')
+    .then((res)=>{
+       console.log(res,'8 product action')
+       const products = res.data.selectedProduct
+       //const {totalPages} = res.data
+        dispatch({type:CATEG_SUCC,payload:products})
+    })
+    .catch((err)=>{
+        console.log(err.message)
+        dispatch({type:CATEG_FAIL})
+    })
+}

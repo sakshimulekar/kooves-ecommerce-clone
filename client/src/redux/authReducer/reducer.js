@@ -22,8 +22,8 @@ export const reducer=(state=initial,{type,payload})=>{
             return {...state,isLoad:false,isAuth:true,message:payload.msg,user:payload.data}
         case LOGIN_SUCCESS:
             //let info = JSON.parse(localStorage.getItem('token'))
-            console.log(payload.msg)
-            return {...state,isLoad:false,isAuth:true,token:payload.token,user:payload.userData,message:payload.msg,isErr:false}
+            console.log(payload.user,'25')
+            return {...state,isLoad:false,isAuth:true,token:payload.token,user:payload.user,message:payload.msg,isErr:false}
         case LOGIN_FAIL:
             return {...state,isErr:true,message:payload,isLoad:false}
         case GOOGLE_LOGIN_SUCCESS:
@@ -32,9 +32,10 @@ export const reducer=(state=initial,{type,payload})=>{
             console.log(info,'22 reducer')
             return {
                   ...state,
-                  user: payload.userData,
+                  user: payload.user,
                   token: payload.token,
                   isAuth: true,
+                  
                 };
 
         case LOGOUT:

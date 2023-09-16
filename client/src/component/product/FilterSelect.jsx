@@ -18,13 +18,13 @@ const FilterSelect = () => {
     const initialRating = searchParams.get("rating")
     const [page, setPage] = useState(1)
     const [order, setorder] = useState(initialorder || "")
-    
     const [brand,setbrand]=useState(initialbrand||[])
     const [category,setcategory]=useState(initialcategory||[])
     const [size,setsize]=useState(initialsize || [])
     const [colour,setcolour]=useState([])
     const [rating,setRating] = useState(initialRating || "")
 
+    
     const handleclick=(e)=>{
         let val=(e.target.value)
         let newbrand=[...brand]
@@ -107,7 +107,6 @@ const FilterSelect = () => {
         boxShadow: 'none',
         cursor: 'pointer', // Optionally set cursor to pointer to indicate it's clickable
     };
-    
     
   return (
     <>
