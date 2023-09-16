@@ -11,7 +11,7 @@ export const wishListAction=(obj)=>(dispatch)=>{
         Authorization: `Bearer ${token}`,
     };
     dispatch({type:WISHLIST_REQ})
-    axios.post('http://localhost:8000/wishlist/addtowishlist',obj,{headers})
+    axios.post('https://stylehub-vb4k.onrender.com/wishlist/addtowishlist',obj,{headers})
     .then((res)=>{
         console.log(res.data.msg,"wishlist action")
         let msg = res.data.message
@@ -37,7 +37,7 @@ export const getWishList = () => async(dispatch) => {
     };
     try {
         dispatch({type:WISHLIST_REQ})
-        const response = await axios.get('http://localhost:8000/wishlist',{headers})
+        const response = await axios.get('https://stylehub-vb4k.onrender.com/wishlist',{headers})
         console.log(response)
         dispatch({type:WISHLIST_GET,payload:response.data.product})
     } catch (error) {
@@ -57,10 +57,10 @@ export const removeWishlist = (obj) => async (dispatch) => {
       dispatch({ type: WISHLIST_REQ });
   
       // Add the product to the cart
-      await axios.post('http://localhost:8000/cart/addToCart', obj, { headers });
+      await axios.post('https://stylehub-vb4k.onrender.com/cart/addToCart', obj, { headers });
   
       // Delete the product from the wishlist
-      const deleteResponse = await axios.delete(`http://localhost:8000/wishlist/delete/${id}`, { headers });
+      const deleteResponse = await axios.delete(`https://stylehub-vb4k.onrender.com/wishlist/delete/${id}`, { headers });
   
       const deleteMessage = deleteResponse.data.message;
   
@@ -69,7 +69,7 @@ export const removeWishlist = (obj) => async (dispatch) => {
       }
   
       // Fetch the updated wishlist data
-      const wishlistResponse = await axios.get('http://localhost:8000/wishlist', { headers });
+      const wishlistResponse = await axios.get('https://stylehub-vb4k.onrender.com/wishlist', { headers });
       const updatedWishlist = wishlistResponse.data.product;
   
       // Update the Redux store with the updated wishlist

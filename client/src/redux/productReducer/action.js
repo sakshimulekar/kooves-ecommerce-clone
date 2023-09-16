@@ -5,7 +5,7 @@ import axios from "axios";
 export const menProducts=(obj,page)=>(dispatch)=>{
     console.log(obj,page,'5')
     dispatch({type:PRODUCT_REQ})
-    axios.get(`http://localhost:8000/men/${page}`,obj)
+    axios.get(`https://stylehub-vb4k.onrender.com/men/${page}`,obj)
     .then((res)=>{
        console.log(res,'8 product action')
        const {products} = res.data
@@ -22,7 +22,7 @@ export const handleSearch =(searchQuery)=> async (dispach) => {
     console.log(searchQuery,'21')
     try {
         dispach({type:SEARCH_REQ})
-        const res = await axios.get(`http://localhost:8000/men/api/search?query=${searchQuery}`)
+        const res = await axios.get(`https://stylehub-vb4k.onrender.com/men/api/search?query=${searchQuery}`)
         console.log(res,' : 26 action')
         const data = await res.data.results
         console.log(data,'25 ')
@@ -41,7 +41,7 @@ export const handleSearch =(searchQuery)=> async (dispach) => {
 export const handleMenu=()=>(dispatch)=>{
     //console.log(obj,'42')
     dispatch({type:CATEG_REQ})
-    return axios.get('http://localhost:8000/men')
+    return axios.get('https://stylehub-vb4k.onrender.com/men')
     .then((res)=>{
        console.log(res,'8 product action')
        const products = res.data.selectedProduct

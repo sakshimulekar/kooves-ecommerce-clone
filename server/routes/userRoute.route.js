@@ -6,14 +6,6 @@ const { blacklist } = require("../blacklist")
 require("dotenv").config()
 const userRoute=express.Router()
 
-// userRoute.get("/",async(req,res)=>{
-//     try {
-//         const user=await UserModel.find()
-//         res.status(200).json({msg:"here are the users",user})
-//     } catch (error) {
-//         res.status(400).json({msg:error.message})
-//     }
-// })
 userRoute.post("/register",async(req,res)=>{
     const {email,password,firstName,lastName}=req.body
     try {

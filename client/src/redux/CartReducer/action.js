@@ -13,7 +13,7 @@ export const addCart = (obj) => async(dispatch) => {
   };
     try {
         dispatch({type:CART_REQ})
-        let response = await axios.post('http://localhost:8000/cart/addToCart',obj,{headers})
+        let response = await axios.post('https://stylehub-vb4k.onrender.com/cart/addToCart',obj,{headers})
         console.log(response)
        let message = await response.data.msg
         const cart = response.data.cart
@@ -58,7 +58,7 @@ export const getCartItem = () => async (dispatch) => {
   };
   try {
         dispatch({type:CART_REQ})
-      const response = await axios.get('http://localhost:8000/cart', { headers });
+      const response = await axios.get('https://stylehub-vb4k.onrender.com/cart', { headers });
       console.log(response.data.user.cart);
       
       if (response.data && response.data.user && response.data.user.cart) {
@@ -82,7 +82,7 @@ export const deleteItemfromCart = (id) => async (dispatch) => {
   };
   try {
         dispatch({type:CART_REQ})
-      const response = await axios.delete(`http://localhost:8000/cart/delete/${id}`, { headers });
+      const response = await axios.delete(`https://stylehub-vb4k.onrender.com/cart/delete/${id}`, { headers });
       //console.log(response.data.message);
       const msg = response.data.message;
       if(msg === "Cart item removed successfully"){

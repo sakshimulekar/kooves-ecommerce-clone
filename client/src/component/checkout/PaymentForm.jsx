@@ -184,7 +184,7 @@ const PaymentForm = () => {
 
   useEffect(() => {
     // Replace this with your actual API endpoint to fetch the client secret
-    fetch('http://localhost:8000/checkout/create-payment-intent', {
+    fetch('https://stylehub-vb4k.onrender.com/checkout/create-payment-intent', {
       method: 'POST',
       //body: JSON.stringify({ cartItems }),
       headers: {

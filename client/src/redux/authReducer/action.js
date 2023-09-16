@@ -12,7 +12,7 @@ import {
 
 export const signup = (obj) => (dispatch) => {
   dispatch({ type: LOGIN_REQ });
-  return axios.post("http://localhost:8000/users/register", obj)
+  return axios.post("https://stylehub-vb4k.onrender.com/users/register", obj)
     .then((res) => {
       console.log(res.data,'signup 62')
       const data = res.data.user
@@ -27,7 +27,7 @@ export const signup = (obj) => (dispatch) => {
 
 export const login = (obj) => (dispatch) => {
   dispatch({ type: LOGIN_REQ });
-   return axios.post("http://localhost:8000/users/login", obj)
+   return axios.post("https://stylehub-vb4k.onrender.com/users/login", obj)
     .then((res) => {
       console.log(res)
       const token = res.data.token;
@@ -70,7 +70,7 @@ export const logout = async(dispatch) => {
     Authorization: `Bearer ${token}`,
   };
   try {
-    let res = await axios.post('http://localhost:8000/users/logout',null,{headers})
+    let res = await axios.post('https://stylehub-vb4k.onrender.com/users/logout',null,{headers})
     console.log(res.data)
     Cookies.remove('token')
     localStorage.remove()
@@ -80,7 +80,7 @@ export const logout = async(dispatch) => {
   }
 }
 export const googlelogin = () => () => {
-  window.open('http://localhost:8000/auth/google', '_self');
+  window.open('https://stylehub-vb4k.onrender.com/auth/google', '_self');
   return
 };
 
