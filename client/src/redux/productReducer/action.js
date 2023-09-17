@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { CATEG_FAIL, CATEG_REQ, CATEG_SUCC, PRODUCT_FAIL, PRODUCT_REQ, PRODUCT_SUCCESS, SEARCH_FAILURE, SEARCH_REQ, SEARCH_SUCCESS } from "./actionType"
+import { CATEG_FAIL, CATEG_REQ, CATEG_SUCC, PRODUCT_FAIL, PRODUCT_REQ, PRODUCT_SUCCESS, SEARCH_FAILURE, SEARCH_REQ, SEARCH_SUCCESS, TOGGLE_SEARCH_COMPLETE } from "./actionType"
 import axios from "axios";
 
 export const menProducts=(obj,page)=>(dispatch)=>{
@@ -23,17 +23,15 @@ export const handleSearch =(searchQuery)=> async (dispach) => {
     try {
         dispach({type:SEARCH_REQ})
         const res = await axios.get(`https://stylehub-vb4k.onrender.com/men/api/search?query=${searchQuery}`)
-        console.log(res,' : 26 action')
+        //console.log(res,' : 26 action')
         const data = await res.data.results
         console.log(data,'25 ')
-        // if(data.length===0){
-        //     toast('no result found')
-        // }
-        
         dispach({type:SEARCH_SUCCESS,payload:data})
+        dispach({type:TOGGLE_SEARCH_COMPLETE,payload:true})
     } catch (error) {
         console.log(error.message)
         dispach({type:SEARCH_FAILURE})
+        dispach({type:TOGGLE_SEARCH_COMPLETE,payload:false})
     }
 };
   

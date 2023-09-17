@@ -84,6 +84,7 @@ menRoute.get('/api/search', async (req, res) => {
   try {
     const { query } = req.query;
     const results = await performSearch(query);
+    console.log(results,'87')
     res.status(200).json({ results });
   } catch (error) {
     console.error(error); // Use console.error for error logging

@@ -43,7 +43,7 @@ const NavBar = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   //const {firstName,picture} = useSelector(store=>store.authReducer.user)
-  const {products} = useSelector(store=>store.productReducer)
+  const {products,searchComplete} = useSelector(store=>store.productReducer)
   const bgColor = useColorModeValue('white', 'gray.700');
   const textColor = useColorModeValue('black', 'white');
   const [searchQuery, setSearchQuery] = useState('');
@@ -51,6 +51,7 @@ const NavBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isTablet, setIsTablet] = useState(window.innerWidth >= 768 && window.innerWidth < 1024);
+  console.log(searchComplete,'searchComplete 54')
 
   useEffect(() => {
     const handleResize = () => {
@@ -85,19 +86,23 @@ const NavBar = () => {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (searchQuery) { // Check if there's a search query before dispatching
-        dispatch(handleSearch(searchQuery)).then(() => {
-          navigate('/searchresult');
-          setSearchQuery("");
-        });
-      }
-    }, 2000);
-  
-    return () => {
-      clearTimeout(timer);
-    };
+  const timer = setTimeout(() => {
+    if (searchQuery) {
+      dispatch(handleSearch(searchQuery));
+    }
+  }, 2000);
+
+  return () => {
+    clearTimeout(timer);
+  };
   }, [searchQuery, dispatch]);
+
+  useEffect(() => {
+    if (searchQuery && searchComplete) {
+    navigate('/searchresult');
+    setSearchQuery("");
+    }
+  }, [searchQuery, searchComplete, navigate]);
   console.log(user,picture,'100')
  
   return (
