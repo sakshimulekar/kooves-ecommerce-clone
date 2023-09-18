@@ -19,6 +19,7 @@ The Kooves Clone E-commerce Application is a full-stack MERN (MongoDB, Express, 
 
 1. **Welcome Page**
    - Includes a navbar, carousel banner, popular products, popular brands, and a footer.
+   - ![Alt Text](https://drive.google.com/file/d/1EJLYlaMLGR0TrQVGRKBk7pE7pqOx7XQg/view?usp=drive_link)
 
 2. **Login Page**
    - Users can log in or sign up.
