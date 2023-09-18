@@ -1,5 +1,4 @@
 kooves_clone https://650737f85ed2ae59db28ce31--stylehubecommerce.netlify.app/
-I apologize for the oversight. Here's an updated version of the readme with descriptions for each page:
 
 # Kooves Clone E-commerce Application
 
