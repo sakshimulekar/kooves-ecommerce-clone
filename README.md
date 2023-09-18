@@ -1,5 +1,3 @@
-kooves_clone https://650737f85ed2ae59db28ce31--stylehubecommerce.netlify.app/
-
 # Kooves Clone E-commerce Application
 
 Welcome to the Kooves Clone E-commerce Application readme file. This document provides an overview of the application's features, technologies used, and how to set it up locally.
